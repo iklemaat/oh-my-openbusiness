@@ -1,7 +1,7 @@
 /**
- * Sisyphus-Junior - Focused Task Executor
+ * Research Assistant - Focused Research Task Executor
  *
- * Executes delegated tasks directly without spawning other agents.
+ * Executes delegated research tasks directly without spawning other agents.
  * Category-spawned executor with domain-specific configurations.
  *
  * Routing:

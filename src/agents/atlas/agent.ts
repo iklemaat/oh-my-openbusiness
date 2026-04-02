@@ -1,8 +1,8 @@
 /**
- * Atlas - Master Orchestrator Agent
+ * Atlas - Research Task Orchestrator Agent
  *
- * Orchestrates work via task() to complete ALL tasks in a todo list until fully done.
- * You are the conductor of a symphony of specialized agents.
+ * Orchestrates research tasks via task() to complete ALL tasks in a research plan until fully done.
+ * You are the conductor of a symphony of specialized research agents.
  *
  * Routing:
  * 1. GPT models (openai/*, github-copilot/gpt-*) → gpt.ts (GPT-5.4 optimized)
@@ -101,7 +101,7 @@ function buildDynamicOrchestratorPrompt(ctx?: OrchestratorContext): string {
 export function createAtlasAgent(ctx: OrchestratorContext): AgentConfig {
   const baseConfig = {
     description:
-      "Orchestrates work via task() to complete ALL tasks in a todo list until fully done. (Atlas - OhMyOpenCode)",
+      "Orchestrates research tasks via task() to complete ALL tasks in a research plan until fully done. (Task Orchestrator - OhMyOpenBusiness)",
     mode: MODE,
     ...(ctx.model ? { model: ctx.model } : {}),
     temperature: 0.1,
@@ -119,24 +119,24 @@ export const atlasPromptMetadata: AgentPromptMetadata = {
   promptAlias: "Atlas",
   triggers: [
     {
-      domain: "Todo list orchestration",
-      trigger: "Complete ALL tasks in a todo list with verification",
+      domain: "Research task orchestration",
+      trigger: "Complete ALL research tasks in a plan with verification",
     },
     {
-      domain: "Multi-agent coordination",
-      trigger: "Parallel task execution across specialized agents",
+      domain: "Multi-agent research coordination",
+      trigger: "Parallel research task execution across specialized agents",
     },
   ],
   useWhen: [
-    "User provides a todo list path (.sisyphus/plans/{name}.md)",
-    "Multiple tasks need to be completed in sequence or parallel",
-    "Work requires coordination across multiple specialized agents",
+    "User provides a research plan with multiple tasks",
+    "Multiple research tasks need to be completed in sequence or parallel",
+    "Research requires coordination across multiple specialized agents",
   ],
   avoidWhen: [
-    "Single simple task that doesn't require orchestration",
+    "Single simple research task that doesn't require orchestration",
     "Tasks that can be handled directly by one agent",
-    "When user wants to execute tasks manually",
+    "When user wants to execute research tasks manually",
   ],
   keyTrigger:
-    "Todo list path provided OR multiple tasks requiring multi-agent orchestration",
+    "Research task list provided OR multiple research tasks requiring multi-agent orchestration",
 }
