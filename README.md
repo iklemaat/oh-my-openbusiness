@@ -81,13 +81,13 @@
 
 ---
 
-# Oh My OpenCode
+# Oh My OpenBusiness — Autonomous UX Research
 
-You're juggling Claude Code, Codex, random OSS models. Configuring workflows. Debugging agents.
+You're juggling user interviews, surveys, analytics dashboards. Guessing what users want. Building features nobody asked for.
 
-We did the work. Tested everything. Kept what actually shipped.
+We did the work. Tested everything. Kept what actually ships insights.
 
-Install OmO. Type `ultrawork`. Done.
+Install OmO. Type `start-research`. Done. Your research team works autonomously.
 
 
 ## Installation
@@ -125,36 +125,34 @@ Read this and tell me why it's not just another boilerplate: https://raw.githubu
 
 ## Highlights
 
-### 🪄 `ultrawork`
+### 🪄 Autonomous UX Research
 
 You're actually reading this? Wild.
 
-Install. Type `ultrawork` (or `ulw`). Done.
+Install. Type `start-research`. Done.
 
 Everything below, every feature, every optimization, you don't need to know it. It just works.
 
-Even only with following subscriptions, ultrawork will work well (this project is not affiliated, this is just personal recommendation):
+Even only with following subscriptions, research will work well (this project is not affiliated, this is just personal recommendation):
 - [ChatGPT Subscription ($20)](https://chatgpt.com/)
-- [Kimi Code Subscription ($0.99) (*only this month)](https://www.kimi.com/kimiplus/sale)
+- [Kimi Code Subscription ($0.99)](https://www.kimi.com/kimiplus/sale)
 - [GLM Coding Plan ($10)](https://z.ai/subscribe)
 - If you are eligible for pay-per-token, using kimi and gemini models won't cost you that much.
 
 |       | Feature                                                  | What it does                                                                                                                                                                                                     |
 | :---: | :------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   🤖   | **Discipline Agents**                                    | Sisyphus orchestrates Hephaestus, Oracle, Librarian, Explore. A full AI dev team in parallel.                                                                                                                    |
-|   ⚡   | **`ultrawork` / `ulw`**                                  | One word. Every agent activates. Doesn't stop until done.                                                                                                                                                        |
-|   🚪   | **[IntentGate](https://factory.ai/news/terminal-bench)** | Analyzes true user intent before classifying or acting. No more literal misinterpretations.                                                                                                                      |
+|   🤖   | **Discipline Agents**                                    | Research Director orchestrates Deep Researcher, Insight Analyst, Web Scout, Industry Researcher. A full UX research team in parallel.                                                                            |
+|   ⚡   | **`start-research`**                                     | One command. Every agent activates. Research doesn't stop until findings are synthesized.                                                                                                                        |
+|   🚪   | **[IntentGate](https://factory.ai/news/terminal-bench)** | Analyzes true research intent before classifying or acting. No more literal misinterpretations.                                                                                                                  |
 |   🔗   | **Hash-Anchored Edit Tool**                              | `LINE#ID` content hash validates every change. Zero stale-line errors. Inspired by [oh-my-pi](https://github.com/can1357/oh-my-pi). [The Harness Problem →](https://blog.can.ac/2026/02/12/the-harness-problem/) |
-|   🛠️   | **LSP + AST-Grep**                                       | Workspace rename, pre-build diagnostics, AST-aware rewrites. IDE precision for agents.                                                                                                                           |
-|   🧠   | **Background Agents**                                    | Fire 5+ specialists in parallel. Context stays lean. Results when ready.                                                                                                                                         |
-|   📚   | **Built-in MCPs**                                        | Exa (web search), Context7 (official docs), Grep.app (GitHub search). Always on.                                                                                                                                 |
-|   🔁   | **Ralph Loop / `/ulw-loop`**                             | Self-referential loop. Doesn't stop until 100% done.                                                                                                                                                             |
-|   ✅   | **Todo Enforcer**                                        | Agent goes idle? System yanks it back. Your task gets done, period.                                                                                                                                              |
-|   💬   | **Comment Checker**                                      | No AI slop in comments. Code reads like a senior wrote it.                                                                                                                                                       |
-|   🖥️   | **Tmux Integration**                                     | Full interactive terminal. REPLs, debuggers, TUIs. All live.                                                                                                                                                     |
+|   🧠   | **Background Agents**                                    | Fire 5+ research specialists in parallel. Context stays lean. Results when ready.                                                                                                                                |
+|   📚   | **Built-in MCPs**                                        | Exa (web search), Academic Search (papers/reports), Social Search (forums/social media). Always on.                                                                                                              |
+|   🔁   | **Ralph Loop / `/research-loop`**                        | Self-referential research loop. Doesn't stop until 100% of questions answered.                                                                                                                                   |
+|   ✅   | **Todo Enforcer**                                        | Agent goes idle? System yanks it back. Your research gets done, period.                                                                                                                                          |
+|   🖥️   | **Tmux Integration**                                     | Full interactive terminal. Research sessions stay alive.                                                                                                                                                         |
 |   🔌   | **Claude Code Compatible**                               | Your hooks, commands, skills, MCPs, and plugins? All work here.                                                                                                                                                  |
 |   🎯   | **Skill-Embedded MCPs**                                  | Skills carry their own MCP servers. No context bloat.                                                                                                                                                            |
-|   📋   | **Prometheus Planner**                                   | Interview-mode strategic planning before any execution.                                                                                                                                                          |
+|   📋   | **Research Planner**                                     | Interview-mode strategic planning before any research execution.                                                                                                                                                 |
 |   🔍   | **`/init-deep`**                                         | Auto-generates hierarchical `AGENTS.md` files throughout your project. Great for both token efficiency and your agent's performance                                                                              |
 
 ### Discipline Agents
@@ -164,30 +162,28 @@ Even only with following subscriptions, ultrawork will work well (this project i
 <td align="center"><img src=".github/assets/hephaestus.png" height="300" /></td>
 </tr></table>
 
-**Sisyphus** (`claude-opus-4-6` / **`kimi-k2.5`** / **`glm-5`** ) is your main orchestrator. He plans, delegates to specialists, and drives tasks to completion with aggressive parallel execution. He does not stop halfway.
+**Research Director** (`qwen3.5` / **`kimi-k2.5`** / **`glm-5`** ) is your main orchestrator. Plans research, delegates to specialists, and drives findings to completion with aggressive parallel execution. Does not stop halfway.
 
-**Hephaestus** (`gpt-5.4`) is your autonomous deep worker. Give him a goal, not a recipe. He explores the codebase, researches patterns, and executes end-to-end without hand-holding. *The Legitimate Craftsman.*
+**Deep Researcher** (`kimi-k2.5`) is your autonomous deep worker. Give it a research question, not a recipe. Explores multiple sources, researches patterns, and synthesizes end-to-end without hand-holding. *The Legitimate Researcher.*
 
-**Prometheus** (`claude-opus-4-6` / **`kimi-k2.5`** / **`glm-5`** ) is your strategic planner. Interview mode: it questions, identifies scope, and builds a detailed plan before a single line of code is touched.
+**Research Planner** (`qwen3.5` / **`kimi-k2.5`** / **`glm-5`** ) is your strategic planning consultant. Interview mode: questions you, identifies research scope, and builds a detailed plan before a single search is executed.
 
 Every agent is tuned to its model's specific strengths. No manual model-juggling. [Learn more →](docs/guide/overview.md)
 
-> Anthropic [blocked OpenCode because of us.](https://x.com/thdxr/status/2010149530486911014) That's why Hephaestus is called "The Legitimate Craftsman." The irony is intentional.
->
-> We run best on Opus, but Kimi K2.5 + GPT-5.4 already beats vanilla Claude Code. Zero config needed.
+> We run best on Qwen, but Kimi K2.5 + GLM-5 already beats vanilla research workflows. Zero config needed.
 
 ### Agent Orchestration
 
-When Sisyphus delegates to a subagent, it doesn't pick a model. It picks a **category**. The category maps automatically to the right model:
+When Research Director delegates to a subagent, it doesn't pick a model. It picks a **category**. The category maps automatically to the right model:
 
 | Category             | What it's for                      |
 | :------------------- | :--------------------------------- |
-| `visual-engineering` | Frontend, UI/UX, design            |
-| `deep`               | Autonomous research + execution    |
-| `quick`              | Single-file changes, typos         |
-| `ultrabrain`         | Hard logic, architecture decisions |
+| `visual-audit`       | Heuristic evaluation, accessibility |
+| `deep-research`      | Autonomous multi-source research    |
+| `quick-lookup`       | Single data point, fact check       |
+| `thematic-analysis`  | Deep insight generation             |
 
-Agent says what kind of work. Harness picks the right model. `ultrabrain` now routes to GPT-5.4 xhigh by default. You touch nothing.
+Agent says what kind of research. Harness picks the right model. `thematic-analysis` now routes to GLM-5 xhigh by default. You touch nothing.
 
 ### Claude Code Compatibility
 
@@ -195,14 +191,14 @@ You dialed in your Claude Code setup. Good.
 
 Every hook, command, skill, MCP, plugin works here unchanged. Full compatibility, including plugins.
 
-### World-Class Tools for Your Agents
+### World-Class Tools for Your Research Team
 
-LSP, AST-Grep, Tmux, MCP actually integrated, not duct-taped together.
+Web search, academic databases, social listening — actually integrated, not duct-taped together.
 
-- **LSP**: `lsp_rename`, `lsp_goto_definition`, `lsp_find_references`, `lsp_diagnostics`. IDE precision for every agent
-- **AST-Grep**: Pattern-aware code search and rewriting across 25 languages
-- **Tmux**: Full interactive terminal. REPLs, debuggers, TUI apps. Your agent stays in session
-- **MCP**: Web search, official docs, GitHub code search. All baked in
+- **Web Search**: Exa/Tavily for broad web discovery
+- **Academic Search**: Context7 for papers, reports, benchmarks
+- **Social Search**: Grep.app for forums, social media, reviews
+- **Tmux**: Full interactive terminal. Research sessions stay alive
 
 ### Skill-Embedded MCPs
 
@@ -210,48 +206,7 @@ MCP servers eat your context budget. We fixed that.
 
 Skills bring their own MCP servers. Spin up on-demand, scoped to task, gone when done. Context window stays clean.
 
-### Codes Better. Hash-Anchored Edits
-
-The harness problem is real. Most agent failures aren't the model. It's the edit tool.
-
-> *"None of these tools give the model a stable, verifiable identifier for the lines it wants to change... They all rely on the model reproducing content it already saw. When it can't - and it often can't - the user blames the model."*
->
-> <br/>- [Can Bölük, The Harness Problem](https://blog.can.ac/2026/02/12/the-harness-problem/)
-
-Inspired by [oh-my-pi](https://github.com/can1357/oh-my-pi), we implemented **Hashline**. Every line the agent reads comes back tagged with a content hash:
-
-```
-11#VK| function hello() {
-22#XJ|   return "world";
-33#MB| }
-```
-
-The agent edits by referencing those tags. If the file changed since the last read, the hash won't match and the edit is rejected before corruption. No whitespace reproduction. No stale-line errors.
-
-Grok Code Fast 1: **6.7% → 68.3%** success rate. Just from changing the edit tool.
-
-### Deep Initialization. `/init-deep`
-
-Run `/init-deep`. It generates hierarchical `AGENTS.md` files:
-
-```
-project/
-├── AGENTS.md              ← project-wide context
-├── src/
-│   ├── AGENTS.md          ← src-specific context
-│   └── components/
-│       └── AGENTS.md      ← component-specific context
-```
-
-Agents auto-read relevant context. Zero manual management.
-
-### Planning. Prometheus
-
-Complex task? Don't prompt and pray.
-
-`/start-work` calls Prometheus. **Interviews you like a real engineer**, identifies scope and ambiguities, builds a verified plan before touching code. Agent knows what it's building before it starts.
-
-### Skills
+### Research Skills
 
 Skills aren't just prompts. Each brings:
 
@@ -259,7 +214,7 @@ Skills aren't just prompts. Each brings:
 - Embedded MCP servers, on-demand
 - Scoped permissions. Agents stay in bounds
 
-Built-ins: `playwright` (browser automation), `git-master` (atomic commits, rebase surgery), `frontend-ui-ux` (design-first UI).
+Built-ins: `research-methodology` (GDS 4-phase framework), `web-scraper` (autonomous scraping), `ux-heuristics` (Nielsen's 10 heuristics), `sentiment-analyzer` (sentiment classification), `social-listener` (social media listening), `persona-builder` (data-driven personas), `journey-mapper` (customer journey maps).
 
 Add your own: `.opencode/skills/*/SKILL.md` or `~/.config/opencode/skills/*/SKILL.md`.
 
@@ -267,7 +222,7 @@ Add your own: `.opencode/skills/*/SKILL.md` or `~/.config/opencode/skills/*/SKIL
 
 ---
 
-> **New to oh-my-opencode?** Read the **[Overview](docs/guide/overview.md)** to understand what you have, or check the **[Orchestration Guide](docs/guide/orchestration.md)** for how agents collaborate.
+> **New to oh-my-openbusiness?** Read the **[Overview](docs/guide/overview.md)** to understand what you have, or check the **[Orchestration Guide](docs/guide/orchestration.md)** for how agents collaborate.
 
 ## Uninstallation
 
