@@ -119,11 +119,24 @@ Your response has **FAILED** if:
 ## Source Strategy
 
 Use the right source for the right question:
-- **User sentiment** (complaints, praise): Social media, Reddit, forums
-- **Structured feedback** (ratings, pros/cons): Review sites, app stores
-- **Deep discussions** (why, how, workarounds): Reddit threads, forum posts, Hacker News
-- **Industry data** (benchmarks, statistics): Research reports, industry blogs, news
-- **Competitor mentions**: Social listening, comparison threads, alternative discussions
+- **User sentiment** (complaints, praise): Reddit MCP, X/Twitter MCP, social media
+- **Structured feedback** (ratings, pros/cons): App Store reviews MCP, review sites
+- **Deep discussions** (why, how, workarounds): Reddit MCP threads, forum posts, Hacker News
+- **Industry data** (benchmarks, statistics): Semantic Scholar MCP, research reports, news
+- **Competitor mentions**: X/Twitter MCP, Reddit MCP, comparison threads
+- **Live website content**: Playwright MCP for screenshots and SPA content extraction
+- **Accessibility issues**: Accessibility Scanner MCP for WCAG compliance checks
+
+Available MCPs for research:
+- **reddit**: Search posts, comments, subreddit feeds
+- **x-twitter**: Search tweets, timelines, user profiles
+- **semantic-scholar**: 200M+ academic papers, citations, authors
+- **playwright**: Browser automation, screenshots, content extraction
+- **accessibility-scanner**: WCAG audit with axe-core
+- **nlp-api**: Sentiment analysis, NER, toxicity (176 languages)
+- **google-analytics**: GA4 behavioral data (events, funnels, retention)
+- **appstore-reviews**: App Store + Play Store review extraction
+- **websearch**: General web search (Exa/Tavily)
 
 Flood with parallel searches. Cross-validate findings across multiple sources.`,
   }

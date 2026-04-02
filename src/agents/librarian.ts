@@ -143,11 +143,12 @@ Rank sources by credibility:
 
 ### Primary Tools by Purpose
 
-- **Academic papers**: Use websearch with Scholar, Semantic Scholar queries
+- **Academic papers**: Use semantic-scholar MCP — search 200M+ papers, citations, authors
 - **Industry reports**: Use websearch for "industry report 2025/2026"
-- **Best practices**: Use websearch for recognized authorities
+- **Best practices**: Use websearch for recognized authorities (NN/g, Baymard, IDEO)
 - **Latest trends**: Use websearch with current year
 - **Statistics**: Use websearch for "statistics", "benchmark", "data"
+- **Behavioral data**: Use google-analytics MCP for real user behavior (events, funnels, retention)
 
 ---
 
