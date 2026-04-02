@@ -49,6 +49,7 @@ export { createPreemptiveCompactionHook } from "./preemptive-compaction";
 export { createTasksTodowriteDisablerHook } from "./tasks-todowrite-disabler";
 export { createRuntimeFallbackHook, type RuntimeFallbackHook, type RuntimeFallbackOptions } from "./runtime-fallback";
 export { createResearchMemoryHook } from "./research-memory";
+export { createSkillAutoUpdaterHook } from "./skill-auto-updater";
 export { createWriteExistingFileGuardHook } from "./write-existing-file-guard";
 export { createBashFileReadGuardHook } from "./bash-file-read-guard";
 export { createHashlineReadEnhancerHook } from "./hashline-read-enhancer";
