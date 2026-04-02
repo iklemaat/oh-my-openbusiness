@@ -4,7 +4,11 @@ description: "Autonomous web scraping for UX research. Triggers: scrape forums, 
 license: "MIT"
 metadata:
   source: "Built-in UX Research skill"
-  version: "1.0.0"
+  version: "2.0.0"
+mcp:
+  - playwright
+  - reddit
+  - appstore-reviews
 allowed-tools:
   - Bash(playwright-cli:*)
   - Bash(python:*)

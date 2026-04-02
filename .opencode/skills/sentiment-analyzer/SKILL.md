@@ -4,7 +4,11 @@ description: "Sentiment analysis for user feedback, reviews, and social media. T
 license: "MIT"
 metadata:
   source: "Built-in UX Research skill"
-  version: "1.0.0"
+  version: "2.0.0"
+mcp:
+  - nlp-api
+  - reddit
+  - appstore-reviews
 ---
 
 # Sentiment Analyzer

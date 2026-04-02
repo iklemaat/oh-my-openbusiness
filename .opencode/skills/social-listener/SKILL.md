@@ -4,7 +4,11 @@ description: "Social media and forum listening for UX research. Triggers: monito
 license: "MIT"
 metadata:
   source: "Built-in UX Research skill"
-  version: "1.0.0"
+  version: "2.0.0"
+mcp:
+  - reddit
+  - x-twitter
+  - nlp-api
 ---
 
 # Social Listener

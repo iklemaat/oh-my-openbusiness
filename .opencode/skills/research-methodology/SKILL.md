@@ -4,7 +4,11 @@ description: "UX research methodology frameworks. Triggers: research planning, m
 license: "MIT"
 metadata:
   source: "Built-in UX Research skill"
-  version: "1.0.0"
+  version: "2.0.0"
+mcp:
+  - semantic-scholar
+  - google-analytics
+  - reddit
 ---
 
 # Research Methodology

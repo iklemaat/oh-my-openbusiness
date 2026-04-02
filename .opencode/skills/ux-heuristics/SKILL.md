@@ -4,7 +4,10 @@ description: "Nielsen's 10 usability heuristics and UX evaluation frameworks. Tr
 license: "MIT"
 metadata:
   source: "Built-in UX Research skill"
-  version: "1.0.0"
+  version: "2.0.0"
+mcp:
+  - accessibility-scanner
+  - playwright
 ---
 
 # UX Heuristics
