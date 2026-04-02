@@ -9,6 +9,8 @@ import {
   createCompactionContextInjector,
   createCompactionTodoPreserverHook,
   createAtlasHook,
+  createResearchMemoryHook,
+  createSkillAutoUpdaterHook,
 } from "../../hooks"
 import { safeCreateHook } from "../../shared/safe-create-hook"
 import { createUnstableAgentBabysitter } from "../unstable-agent-babysitter"
@@ -21,6 +23,8 @@ export type ContinuationHooks = {
   unstableAgentBabysitter: ReturnType<typeof createUnstableAgentBabysitter> | null
   backgroundNotificationHook: ReturnType<typeof createBackgroundNotificationHook> | null
   atlasHook: ReturnType<typeof createAtlasHook> | null
+  researchMemoryHook: ReturnType<typeof createResearchMemoryHook> | null
+  skillAutoUpdaterHook: ReturnType<typeof createSkillAutoUpdaterHook> | null
 }
 
 type SessionRecovery = {
@@ -116,6 +120,14 @@ export function createContinuationHooks(args: {
         }))
     : null
 
+  const researchMemoryHook = isHookEnabled("research-memory")
+    ? safeHook("research-memory", () => createResearchMemoryHook())
+    : null
+
+  const skillAutoUpdaterHook = isHookEnabled("skill-auto-updater")
+    ? safeHook("skill-auto-updater", () => createSkillAutoUpdaterHook())
+    : null
+
   return {
     stopContinuationGuard,
     compactionContextInjector,
@@ -124,5 +136,7 @@ export function createContinuationHooks(args: {
     unstableAgentBabysitter,
     backgroundNotificationHook,
     atlasHook,
+    researchMemoryHook,
+    skillAutoUpdaterHook,
   }
 }
