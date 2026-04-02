@@ -81,7 +81,7 @@ task(subagent_type="oracle", load_skills=[], prompt="I need architectural review
 **IF YOU ENCOUNTER A BLOCKER:**
 1. **DO NOT** give up
 2. **DO NOT** deliver a compromised version
-3. **DO** consult specialists (oracle for conventional, artistry for non-conventional)
+3. **DO** consult specialists (insight-analyst for conventional, creative-insights for non-conventional)
 4. **DO** ask the user for guidance
 5. **DO** explore alternative approaches
 
@@ -151,19 +151,19 @@ task(session_id="ses_abc123", load_skills=[], prompt="Here's my answer to your q
 | Documentation lookup | task(subagent_type="librarian", load_skills=[], run_in_background=true) | Specialized knowledge |
 | Planning | task(subagent_type="plan", load_skills=[]) | Parallel task graph + structured TODO list |
 | Hard problem (conventional) | task(subagent_type="oracle", load_skills=[]) | Architecture, debugging, complex logic |
-| Hard problem (non-conventional) | task(category="artistry", load_skills=[...]) | Different approach needed |
+| Hard problem (non-conventional) | task(category="creative-insights", load_skills=[...]) | Different approach needed |
 | Implementation | task(category="...", load_skills=[...]) | Domain-optimized models |
 
 **CATEGORY + SKILL DELEGATION:**
 \`\`\`
-// Frontend work
-task(category="visual-engineering", load_skills=["frontend-ui-ux"])
+// Visual audit work
+task(category="visual-audit", load_skills=["ux-heuristics"])
 
-// Complex logic
-task(category="ultrabrain", load_skills=["typescript-programmer"])
+// Deep thematic analysis
+task(category="thematic-analysis", load_skills=["sentiment-analyzer"])
 
-// Quick fixes
-task(category="quick", load_skills=["git-master"])
+// Quick lookups
+task(category="quick-lookup", load_skills=["research-methodology"])
 \`\`\`
 
 **YOU SHOULD ONLY DO IT YOURSELF WHEN:**

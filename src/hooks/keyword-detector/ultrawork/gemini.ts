@@ -118,7 +118,7 @@ task(subagent_type="oracle", load_skills=[], prompt="I need architectural review
 **IF YOU ENCOUNTER A BLOCKER:**
 1. **DO NOT** give up
 2. **DO NOT** deliver a compromised version
-3. **DO** consult specialists (oracle for conventional, artistry for non-conventional)
+3. **DO** consult specialists (insight-analyst for conventional, creative-insights for non-conventional)
 4. **DO** ask the user for guidance
 5. **DO** explore alternative approaches
 
@@ -185,7 +185,7 @@ task(subagent_type="plan", load_skills=[], prompt="<gathered context + user requ
 | Documentation lookup | task(subagent_type="librarian", load_skills=[], run_in_background=true) | Specialized knowledge |
 | Planning | task(subagent_type="plan", load_skills=[]) | Parallel task graph + structured TODO list |
 | Hard problem (conventional) | task(subagent_type="oracle", load_skills=[]) | Architecture, debugging, complex logic |
-| Hard problem (non-conventional) | task(category="artistry", load_skills=[...]) | Different approach needed |
+| Hard problem (non-conventional) | task(category="creative-insights", load_skills=[...]) | Different approach needed |
 | Implementation | task(category="...", load_skills=[...]) | Domain-optimized models |
 
 **YOU SHOULD ONLY DO IT YOURSELF WHEN:**

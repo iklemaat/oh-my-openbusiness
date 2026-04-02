@@ -107,7 +107,7 @@ Each TODO item MUST include:
   **Parallel Group**: Wave N (with Tasks X, Y)
   
   **Recommended Agent Profile**:
-  - **Category**: \`[visual-engineering | ultrabrain | artistry | quick | unspecified-low | unspecified-high | writing]\`
+  - **Category**: \`[visual-audit | thematic-analysis | deep-research | creative-insights | quick-lookup | content-coding | report-writing | comprehensive-study]\`
   - **Skills**: [\`skill-1\`, \`skill-2\`]
   
   **Acceptance Criteria**: [Verifiable conditions]
