@@ -8,6 +8,8 @@ import { REFACTOR_TEMPLATE } from "./templates/refactor"
 import { START_WORK_TEMPLATE } from "./templates/start-work"
 import { HANDOFF_TEMPLATE } from "./templates/handoff"
 import { REMOVE_AI_SLOPS_TEMPLATE } from "./templates/remove-ai-slops"
+import { START_RESEARCH_TEMPLATE } from "./templates/start-research"
+import { RESEARCH_LOOP_TEMPLATE } from "./templates/research-loop"
 
 export interface LoadBuiltinCommandsOptions {
   useRegisteredAgents?: boolean
@@ -120,6 +122,40 @@ Timestamp: $TIMESTAMP
 $ARGUMENTS
 </user-request>`,
       argumentHint: "[goal]",
+    },
+    "start-research": {
+      description: "(builtin) Start autonomous UX research session",
+      agent: "sisyphus",
+      template: `<command-instruction>
+${START_RESEARCH_TEMPLATE}
+</command-instruction>
+
+<session-context>
+Session ID: $SESSION_ID
+Timestamp: $TIMESTAMP
+</session-context>
+
+<user-request>
+$ARGUMENTS
+</user-request>`,
+      argumentHint: "[research-topic]",
+    },
+    "research-loop": {
+      description: "(builtin) Start self-referential UX research loop until saturation",
+      agent: "sisyphus",
+      template: `<command-instruction>
+${RESEARCH_LOOP_TEMPLATE}
+</command-instruction>
+
+<session-context>
+Session ID: $SESSION_ID
+Timestamp: $TIMESTAMP
+</session-context>
+
+<user-request>
+$ARGUMENTS
+</user-request>`,
+      argumentHint: '"research-topic"',
     },
   }
 }
