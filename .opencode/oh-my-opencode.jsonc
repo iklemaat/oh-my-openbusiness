@@ -1,0 +1,122 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "model_fallback": true,
+  "new_task_system_enabled": true,
+  "agents": {
+    "sisyphus": {
+      "model": "bailian-coding-plan/qwen3.5-plus",
+      "fallback_models": ["bailian-coding-plan/glm-5"],
+      "thinking": { "type": "enabled", "budgetTokens": 8192 },
+      "description": "Research Director - Main orchestrator for UX research with 1M context + vision"
+    },
+    "hephaestus": {
+      "model": "bailian-coding-plan/glm-5",
+      "fallback_models": ["bailian-coding-plan/glm-4.7"],
+      "thinking": { "type": "enabled", "budgetTokens": 8192 },
+      "allow_non_gpt_model": true,
+      "description": "Deep Researcher - Autonomous research with reasoning"
+    },
+    "oracle": {
+      "model": "bailian-coding-plan/qwen3.5-plus",
+      "fallback_models": ["bailian-coding-plan/glm-5"],
+      "thinking": { "type": "enabled", "budgetTokens": 8192 },
+      "description": "Insight Analyst - Complex synthesis with max capability"
+    },
+    "librarian": {
+      "model": "bailian-coding-plan/qwen3.5-plus",
+      "fallback_models": ["bailian-coding-plan/glm-5"],
+      "description": "Industry Researcher - 1M context for large documents and reports"
+    },
+    "explore": {
+      "model": "bailian-coding-plan/glm-5",
+      "fallback_models": ["bailian-coding-plan/glm-4.7"],
+      "thinking": { "type": "enabled", "budgetTokens": 8192 },
+      "description": "Web Scout - Strong reasoning for pattern detection"
+    },
+    "atlas": {
+      "model": "bailian-coding-plan/qwen3.5-plus",
+      "fallback_models": ["bailian-coding-plan/glm-5"],
+      "thinking": { "type": "enabled", "budgetTokens": 8192 },
+      "description": "Master Orchestrator - Full context coordination with max capability"
+    },
+    "prometheus": {
+      "model": "bailian-coding-plan/qwen3.5-plus",
+      "fallback_models": ["bailian-coding-plan/glm-5"],
+      "thinking": { "type": "enabled", "budgetTokens": 8192 },
+      "description": "Research Planner - Complex planning with max capability"
+    },
+    "metis": {
+      "model": "bailian-coding-plan/glm-5",
+      "fallback_models": ["bailian-coding-plan/glm-4.7"],
+      "thinking": { "type": "enabled", "budgetTokens": 8192 },
+      "description": "Research Consultant - Strong reasoning for optimization"
+    },
+    "momus": {
+      "model": "bailian-coding-plan/glm-4.7",
+      "fallback_models": ["bailian-coding-plan/MiniMax-M2.5"],
+      "thinking": { "type": "enabled", "budgetTokens": 8192 },
+      "description": "Plan Reviewer - Quality analysis with reasoning"
+    },
+    "sisyphus-junior": {
+      "model": "bailian-coding-plan/MiniMax-M2.5",
+      "fallback_models": ["bailian-coding-plan/glm-4.7"],
+      "thinking": { "type": "enabled", "budgetTokens": 4096 },
+      "description": "Research Assistant - Fast assistant tasks"
+    },
+    "multimodal-looker": {
+      "model": "bailian-coding-plan/kimi-k2.5",
+      "fallback_models": ["bailian-coding-plan/qwen3.5-plus"],
+      "thinking": { "type": "enabled", "budgetTokens": 8192 },
+      "description": "Visual Analyst - Image analysis with text+image input"
+    }
+  },
+  "categories": {
+    "ultrabrain": {
+      "model": "bailian-coding-plan/qwen3.5-plus",
+      "fallback_models": ["bailian-coding-plan/glm-5"],
+      "thinking": { "type": "enabled", "budgetTokens": 8192 },
+      "description": "Complex reasoning and difficult multi-step problems"
+    },
+    "deep": {
+      "model": "bailian-coding-plan/glm-5",
+      "fallback_models": ["bailian-coding-plan/glm-4.7"],
+      "thinking": { "type": "enabled", "budgetTokens": 8192 },
+      "description": "Deep research and analysis"
+    },
+    "visual-engineering": {
+      "model": "bailian-coding-plan/kimi-k2.5",
+      "fallback_models": ["bailian-coding-plan/qwen3.5-plus"],
+      "thinking": { "type": "enabled", "budgetTokens": 8192 },
+      "description": "Visual analysis and heuristic evaluation - multimodal"
+    },
+    "artistry": {
+      "model": "bailian-coding-plan/kimi-k2.5",
+      "fallback_models": ["bailian-coding-plan/qwen3.5-plus"],
+      "thinking": { "type": "enabled", "budgetTokens": 8192 },
+      "description": "Creative work and design - multimodal support"
+    },
+    "quick": {
+      "model": "bailian-coding-plan/MiniMax-M2.5",
+      "fallback_models": ["bailian-coding-plan/glm-4.7"],
+      "thinking": { "type": "enabled", "budgetTokens": 4096 },
+      "description": "Fast simple tasks - speed optimized"
+    },
+    "unspecified-low": {
+      "model": "bailian-coding-plan/MiniMax-M2.5",
+      "fallback_models": ["bailian-coding-plan/glm-4.7"],
+      "description": "Low effort unspecified tasks - fast and cheap"
+    },
+    "unspecified-high": {
+      "model": "bailian-coding-plan/qwen3.5-plus",
+      "fallback_models": ["bailian-coding-plan/glm-5"],
+      "thinking": { "type": "enabled", "budgetTokens": 8192 },
+      "description": "High effort unspecified tasks - max capability"
+    },
+    "writing": {
+      "model": "bailian-coding-plan/qwen3.5-plus",
+      "fallback_models": ["bailian-coding-plan/glm-5"],
+      "thinking": { "type": "enabled", "budgetTokens": 8192 },
+      "description": "Documentation, docs, and writing tasks"
+    }
+  }
+}
