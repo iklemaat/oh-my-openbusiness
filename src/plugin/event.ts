@@ -260,6 +260,26 @@ export function createEventHandler(args: {
     await runEventHookSafely("writeExistingFileGuard", hooks.writeExistingFileGuard?.event, input);
     await runEventHookSafely("atlasHook", hooks.atlasHook?.handler, input);
     await runEventHookSafely("autoSlashCommand", hooks.autoSlashCommand?.event, input);
+
+    if (hooks.researchMemory) {
+      try {
+        const props = input.event.properties as Record<string, unknown> | undefined;
+        await hooks.researchMemory(
+          { type: input.event.type, properties: props },
+          {
+            directory: pluginContext.directory,
+            log: {
+              warn: (msg: string) => log(`[research-memory] WARN: ${msg}`),
+              info: (msg: string) => log(`[research-memory] INFO: ${msg}`),
+              error: (msg: string) => log(`[research-memory] ERROR: ${msg}`),
+            },
+            client: pluginContext.client,
+          } as any,
+        );
+      } catch (error) {
+        log(`[research-memory] Hook error: ${error}`);
+      }
+    }
   };
 
   const recentSyntheticIdles = new Map<string, number>();

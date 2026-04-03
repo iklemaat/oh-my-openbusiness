@@ -26,6 +26,7 @@ import {
   createPreemptiveCompactionHook,
   createRuntimeFallbackHook,
   createLegacyPluginToastHook,
+  createResearchMemoryHook,
 } from "../../hooks"
 import { createAnthropicEffortHook } from "../../hooks/anthropic-effort"
 import {
@@ -62,6 +63,7 @@ export type SessionHooks = {
   anthropicEffort: ReturnType<typeof createAnthropicEffortHook> | null
   runtimeFallback: ReturnType<typeof createRuntimeFallbackHook> | null
   legacyPluginToast: ReturnType<typeof createLegacyPluginToastHook> | null
+  researchMemory: ReturnType<typeof createResearchMemoryHook> | null
 }
 
 export function createSessionHooks(args: {
@@ -269,6 +271,10 @@ export function createSessionHooks(args: {
     ? safeHook("legacy-plugin-toast", () => createLegacyPluginToastHook(ctx))
     : null
 
+  const researchMemory = isHookEnabled("research-memory")
+    ? safeHook("research-memory", () => createResearchMemoryHook())
+    : null
+
   return {
     contextWindowMonitor,
     preemptiveCompaction,
@@ -294,5 +300,6 @@ export function createSessionHooks(args: {
     anthropicEffort,
     runtimeFallback,
     legacyPluginToast,
+    researchMemory,
   }
 }
