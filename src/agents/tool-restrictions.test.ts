@@ -8,105 +8,82 @@ import { createAtlasAgent } from "./atlas"
 
 const TEST_MODEL = "anthropic/claude-sonnet-4-5"
 
-describe("read-only agent tool restrictions", () => {
-  const FILE_WRITE_TOOLS = ["write", "edit", "apply_patch"]
-
+describe("agent tool restrictions", () => {
   describe("Oracle", () => {
     test("denies all file-writing tools", () => {
-      // given
       const agent = createOracleAgent(TEST_MODEL)
-
-      // when
       const permission = agent.permission as Record<string, string>
-
-      // then
-      for (const tool of FILE_WRITE_TOOLS) {
-        expect(permission[tool]).toBe("deny")
-      }
+      expect(permission["write"]).toBe("deny")
+      expect(permission["edit"]).toBe("deny")
+      expect(permission["apply_patch"]).toBe("deny")
     })
 
     test("denies task but allows call_omo_agent for research", () => {
-      // given
       const agent = createOracleAgent(TEST_MODEL)
-
-      // when
       const permission = agent.permission as Record<string, string>
-
-      // then
       expect(permission["task"]).toBe("deny")
       expect(permission["call_omo_agent"]).toBeUndefined()
     })
   })
 
   describe("Librarian", () => {
-    test("denies all file-writing tools", () => {
-      // given
+    test("allows write for saving research findings but denies edit/apply_patch", () => {
       const agent = createLibrarianAgent(TEST_MODEL)
-
-      // when
       const permission = agent.permission as Record<string, string>
+      expect(permission["write"]).toBeUndefined()
+      expect(permission["edit"]).toBe("deny")
+      expect(permission["apply_patch"]).toBe("deny")
+    })
 
-      // then
-      for (const tool of FILE_WRITE_TOOLS) {
-        expect(permission[tool]).toBe("deny")
-      }
+    test("denies task and call_omo_agent", () => {
+      const agent = createLibrarianAgent(TEST_MODEL)
+      const permission = agent.permission as Record<string, string>
+      expect(permission["task"]).toBe("deny")
+      expect(permission["call_omo_agent"]).toBe("deny")
     })
   })
 
   describe("Explore", () => {
-    test("denies all file-writing tools", () => {
-      // given
+    test("allows write for saving findings but denies edit/apply_patch", () => {
       const agent = createExploreAgent(TEST_MODEL)
-
-      // when
       const permission = agent.permission as Record<string, string>
+      expect(permission["write"]).toBeUndefined()
+      expect(permission["edit"]).toBe("deny")
+      expect(permission["apply_patch"]).toBe("deny")
+    })
 
-      // then
-      for (const tool of FILE_WRITE_TOOLS) {
-        expect(permission[tool]).toBe("deny")
-      }
+    test("denies task and call_omo_agent", () => {
+      const agent = createExploreAgent(TEST_MODEL)
+      const permission = agent.permission as Record<string, string>
+      expect(permission["task"]).toBe("deny")
+      expect(permission["call_omo_agent"]).toBe("deny")
     })
   })
 
   describe("Momus", () => {
     test("denies all file-writing tools", () => {
-      // given
       const agent = createMomusAgent(TEST_MODEL)
-
-      // when
       const permission = agent.permission as Record<string, string>
-
-      // then
-      for (const tool of FILE_WRITE_TOOLS) {
-        expect(permission[tool]).toBe("deny")
-      }
+      expect(permission["write"]).toBe("deny")
+      expect(permission["edit"]).toBe("deny")
+      expect(permission["apply_patch"]).toBe("deny")
     })
   })
 
   describe("Metis", () => {
     test("denies all file-writing tools", () => {
-      // given
       const agent = createMetisAgent(TEST_MODEL)
-
-      // when
       const permission = agent.permission as Record<string, string>
-
-      // then
-      for (const tool of FILE_WRITE_TOOLS) {
-        expect(permission[tool]).toBe("deny")
-      }
+      expect(permission["write"]).toBe("deny")
+      expect(permission["edit"]).toBe("deny")
+      expect(permission["apply_patch"]).toBe("deny")
     })
   })
 
   describe("Atlas", () => {
     test("allows delegation tools for orchestration", () => {
-      // given
       const agent = createAtlasAgent({ model: TEST_MODEL })
-
-      // when
       const permission = (agent.permission ?? {}) as Record<string, string>
-
-      // then
       expect(permission["task"]).toBeUndefined()
       expect(permission["call_omo_agent"]).toBeUndefined()
     })

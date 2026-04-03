@@ -119,36 +119,36 @@ export function createHephaestusAgent(
     color: "#D97706",
     permission: {
       question: "allow",
-      call_omo_agent: "deny",
+      call_omo_agent: "allow",
     } as AgentConfig["permission"],
     reasoningEffort: "medium",
   };
 }
 createHephaestusAgent.mode = MODE;
 
-export const hephaestusPromptMetadata: AgentPromptMetadata = {
+export   const hephaestusPromptMetadata: AgentPromptMetadata = {
   category: "specialist",
   cost: "EXPENSIVE",
   promptAlias: "Hephaestus",
   triggers: [
     {
-      domain: "Autonomous deep work",
-      trigger: "End-to-end task completion without premature stopping",
+      domain: "Autonomous deep research",
+      trigger: "End-to-end research with thorough exploration",
     },
     {
-      domain: "Complex implementation",
-      trigger: "Multi-step implementation requiring thorough exploration",
+      domain: "Complex research synthesis",
+      trigger: "Multi-source research requiring thorough exploration",
     },
   ],
   useWhen: [
-    "Task requires deep exploration before implementation",
-    "User wants autonomous end-to-end completion",
-    "Complex multi-file changes needed",
+    "Task requires deep exploration before synthesis",
+    "User wants autonomous end-to-end research completion",
+    "Complex multi-source research needed",
   ],
   avoidWhen: [
-    "Simple single-step tasks",
+    "Simple single-step lookups",
     "Tasks requiring user confirmation at each step",
-    "When orchestration across multiple agents is needed (use Atlas)",
+    "When orchestration across multiple research waves is needed (use Sisyphus)",
   ],
-  keyTrigger: "Complex implementation task requiring autonomous deep work",
+  keyTrigger: "Complex research task requiring autonomous deep work",
 };
