@@ -1,10 +1,10 @@
-# src/tools/ — 26 Tools Across 15 Directories
+# src/tools/ — Research Tools
 
-**Generated:** 2026-03-06
+**Generated:** 2026-04-03
 
 ## OVERVIEW
 
-26 tools registered via `createToolRegistry()`. Two patterns: factory functions (`createXXXTool`) for 19 tools, direct `ToolDefinition` for 7 (LSP + interactive_bash).
+Research tools registered via `createToolRegistry()`. Factory functions (`createXXXTool`) for all tools.
 
 ## TOOL CATALOG
 
@@ -23,7 +23,7 @@
 |------|---------|------------|
 | `task` | `createDelegateTask` | description, prompt, category, subagent_type, run_in_background, session_id, load_skills, command |
 
-**8 Built-in Categories**: visual-engineering, ultrabrain, deep, artistry, quick, unspecified-low, unspecified-high, writing
+**8 Research Categories**: visual-audit, thematic-analysis, deep-research, creative-insights, quick-lookup, content-coding, report-writing, comprehensive-study
 
 ### Agent Invocation (1)
 
@@ -35,28 +35,8 @@
 
 | Tool | Factory | Parameters |
 |------|---------|------------|
-| `background_output` | `createBackgroundOutput` | task_id, block, timeout, full_session, include_thinking, message_limit, since_message_id, thinking_max_chars |
+| `background_output` | `createBackgroundOutput` | task_id, block, timeout, full_session, include_thinking, message_limit, since_message_id |
 | `background_cancel` | `createBackgroundCancel` | taskId, all |
-
-### LSP Refactoring (6) — Direct ToolDefinition
-
-| Tool | Parameters |
-|------|------------|
-| `lsp_goto_definition` | filePath, line, character |
-| `lsp_find_references` | filePath, line, character, includeDeclaration |
-| `lsp_symbols` | filePath, scope (document/workspace), query, limit |
-| `lsp_diagnostics` | filePath, severity |
-| `lsp_prepare_rename` | filePath, line, character |
-| `lsp_rename` | filePath, line, character, newName |
-
-### Code Search (4)
-
-| Tool | Factory | Parameters |
-|------|---------|------------|
-| `ast_grep_search` | `createAstGrepTools` | pattern, lang, paths, globs, context |
-| `ast_grep_replace` | `createAstGrepTools` | pattern, rewrite, lang, paths, globs, dryRun |
-| `grep` | `createGrepTools` | pattern, path, include (60s timeout, 10MB limit) |
-| `glob` | `createGlobTools` | pattern, path (60s timeout, 100 file limit) |
 
 ### Session History (4)
 
@@ -72,33 +52,26 @@
 | Tool | Factory | Parameters |
 |------|---------|------------|
 | `skill` | `createSkillTool` | name, user_message |
-| `skill_mcp` | `createSkillMcpTool` | mcp_name, tool_name/resource_name/prompt_name, arguments, grep |
+| `skill_mcp` | `createSkillMcpTool` | mcp_name, tool_name/resource_name/prompt_name, arguments |
 
-### System (2)
+### System (1)
 
 | Tool | Factory | Parameters |
 |------|---------|------------|
 | `interactive_bash` | Direct | tmux_command |
-| `look_at` | `createLookAt` | file_path, image_data, goal |
-
-### Editing (1) — Conditional
-
-| Tool | Factory | Parameters |
-|------|---------|------------|
-| `hashline_edit` | `createHashlineEditTool` | file, edits[] |
 
 ## DELEGATION CATEGORIES
 
 | Category | Model | Domain |
 |----------|-------|--------|
-| visual-engineering | gemini-3.1-pro high | Frontend, UI/UX |
-| ultrabrain | gpt-5.4 xhigh | Hard logic |
-| deep | gpt-5.4 medium | Autonomous problem-solving |
-| artistry | gemini-3.1-pro high | Creative approaches |
-| quick | gpt-5.4-mini | Trivial tasks |
-| unspecified-low | claude-sonnet-4-6 | Moderate effort |
-| unspecified-high | claude-opus-4-6 max | High effort |
-| writing | kimi-k2p5 | Documentation |
+| visual-audit | kimi-k2.5 high | Heuristic evaluation, visual analysis |
+| thematic-analysis | glm-5 xhigh | Pattern identification, coding |
+| deep-research | kimi-k2.5 medium | In-depth investigation |
+| creative-insights | qwen3.5-plus high | Creative analysis, ideation |
+| quick-lookup | MiniMax-M2.5 | Fast fact-finding |
+| content-coding | glm-5 | Qualitative data coding |
+| report-writing | kimi-k2.5 | Research report generation |
+| comprehensive-study | qwen3.5-plus max | Full research studies |
 
 ## HOW TO ADD A TOOL
 

@@ -1,6 +1,6 @@
-# src/features/ — 19 Feature Modules
+# src/features/ — Feature Modules
 
-**Generated:** 2026-03-06
+**Generated:** 2026-04-03
 
 ## OVERVIEW
 
@@ -8,39 +8,36 @@ Standalone feature modules wired into plugin/ layer. Each is self-contained with
 
 ## MODULE MAP
 
-| Module | Files | Complexity | Purpose |
-|--------|-------|------------|---------|
-| **opencode-skill-loader** | 33 | HIGH | YAML frontmatter skill loading from 4 scopes |
-| **background-agent** | 31 | HIGH | Task lifecycle, concurrency (5/model), polling, spawner pattern |
-| **tmux-subagent** | 30 | HIGH | Tmux pane management, grid planning, session orchestration |
-| **mcp-oauth** | 18 | HIGH | OAuth 2.0 + PKCE + DCR (RFC 7591) for MCP servers |
-| **builtin-skills** | 17 | LOW | 6 skills: git-master, playwright, playwright-cli, agent-browser, dev-browser, frontend-ui-ux |
-| **skill-mcp-manager** | 12 | MEDIUM | MCP client lifecycle per session (stdio + HTTP) |
-| **claude-code-plugin-loader** | 10 | MEDIUM | Unified plugin discovery from .opencode/plugins/ |
-| **builtin-commands** | 11 | LOW | Command templates: refactor, init-deep, handoff, etc. |
-| **claude-tasks** | 7 | MEDIUM | Task schema + file storage + OpenCode todo sync |
-| **claude-code-mcp-loader** | 6 | MEDIUM | .mcp.json loading with ${VAR} env expansion |
-| **context-injector** | 6 | MEDIUM | AGENTS.md/README.md injection into context |
-| **run-continuation-state** | 5 | LOW | Persistent state for `run` command continuation across sessions |
-| **hook-message-injector** | 5 | MEDIUM | System message injection for hooks |
-| **boulder-state** | 5 | LOW | Persistent state for multi-step operations |
-| **task-toast-manager** | 4 | MEDIUM | Task progress notifications |
-| **tool-metadata-store** | 3 | LOW | Tool execution metadata cache |
-| **claude-code-session-state** | 3 | LOW | Subagent session state tracking |
-| **claude-code-command-loader** | 3 | LOW | Load commands from .opencode/commands/ |
-| **claude-code-agent-loader** | 3 | LOW | Load agents from .opencode/agents/ |
+| Module | Files | Purpose |
+|--------|-------|---------|
+| **opencode-skill-loader** | 33 | YAML frontmatter skill loading from 4 scopes (project, opencode, user, global) |
+| **background-agent** | 31 | Task lifecycle, concurrency (5/model), polling, spawner pattern for parallel research waves |
+| **builtin-skills** | 13 | 10 UX Research skills: web-scraper, social-listener, sentiment-analyzer, persona-builder, journey-mapper, ux-heuristics, research-methodology, competitor-analyst, data-triangulator, research-architect |
+| **builtin-commands** | 9 | Research commands: init-deep, start-research, research-loop |
+| **skill-mcp-manager** | 12 | MCP client lifecycle per session (stdio + HTTP) for research MCPs |
+| **claude-code-plugin-loader** | 10 | Unified plugin discovery from .opencode/plugins/ |
+| **claude-code-mcp-loader** | 6 | .mcp.json loading with ${VAR} env expansion |
+| **context-injector** | 6 | AGENTS.md/README.md injection into context |
+| **claude-code-session-state** | 3 | Subagent session state tracking |
+| **claude-code-command-loader** | 3 | Load commands from .opencode/commands/ |
+| **claude-code-agent-loader** | 3 | Load agents from .opencode/agents/ |
+| **task-toast-manager** | 4 | Task progress notifications |
+| **tool-metadata-store** | 3 | Tool execution metadata cache |
+| **run-continuation-state** | 5 | Persistent state for `run` command continuation |
+| **hook-message-injector** | 5 | System message injection for hooks |
+| **boulder-state** | 5 | Persistent state for multi-step operations |
 
 ## KEY MODULES
 
-### background-agent (31 files, ~10k LOC)
+### background-agent (31 files)
 
-Core orchestration engine. `BackgroundManager` manages task lifecycle:
+Core orchestration engine for parallel research waves. `BackgroundManager` manages task lifecycle:
 - States: pending → running → completed/error/cancelled/interrupt
 - Concurrency: per-model/provider limits via `ConcurrencyManager` (FIFO queue)
-- Polling: 3s interval, completion via idle events + stability detection (10s unchanged)
+- Polling: 3s interval, completion via idle events + stability detection
 - spawner/: 8 focused files composing via `SpawnerContext` interface
 
-### opencode-skill-loader (33 files, ~3.2k LOC)
+### opencode-skill-loader (33 files)
 
 4-scope skill discovery (project > opencode > user > global):
 - YAML frontmatter parsing from SKILL.md files
@@ -48,23 +45,19 @@ Core orchestration engine. `BackgroundManager` manages task lifecycle:
 - Template resolution with variable substitution
 - Provider gating for model-specific skills
 
-### tmux-subagent (30 files, ~3.6k LOC)
+### builtin-skills (10 skill objects)
 
-State-first tmux integration:
-- `TmuxSessionManager`: pane lifecycle, grid planning
-- Spawn action decider + target finder
-- Polling manager for session health
-- Event handlers for pane creation/destruction
+| Skill | Purpose |
+|-------|---------|
+| web-scraper | Autonomous web scraping for UX research |
+| social-listener | Social media and forum monitoring |
+| sentiment-analyzer | 3-phase sentiment analysis protocol |
+| persona-builder | Data-driven persona creation |
+| journey-mapper | Customer journey map generation |
+| ux-heuristics | Nielsen's 10 heuristics evaluation |
+| research-methodology | GDS 4-phase research framework |
+| competitor-analyst | Competitive UX benchmarking |
+| data-triangulator | Cross-validate findings across sources |
+| research-architect | Multi-wave research plan design |
 
-### builtin-skills (6 skill objects)
-
-| Skill | Size | MCP | Tools |
-|-------|------|-----|-------|
-| git-master | 1111 LOC | — | Bash |
-| playwright | 312 LOC | @playwright/mcp | — |
-| agent-browser | (in playwright.ts) | — | Bash(agent-browser:*) |
-| playwright-cli | 268 LOC | — | Bash(playwright-cli:*) |
-| dev-browser | 221 LOC | — | Bash |
-| frontend-ui-ux | 79 LOC | — | — |
-
-Browser variant selected by `browserProvider` config: playwright (default) | playwright-cli | agent-browser.
+Browser automation via playwright skill (Playwright MCP).

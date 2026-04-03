@@ -1,6 +1,6 @@
-# src/agents/ — 11 Agent Definitions
+# src/agents/ — 11 UX Research Agent Definitions
 
-**Generated:** 2026-03-06
+**Generated:** 2026-04-03
 
 ## OVERVIEW
 
@@ -8,54 +8,52 @@ Agent factories following `createXXXAgent(model) → AgentConfig` pattern. Each 
 
 ## AGENT INVENTORY
 
-| Agent | Model | Temp | Mode | Fallback Chain | Purpose |
-|-------|-------|------|------|----------------|---------|
-| **Sisyphus** | claude-opus-4-6 max | 0.1 | all | k2p5 → kimi-k2.5 → gpt-5.4 medium → glm-5 → big-pickle | Main orchestrator, plans + delegates |
-| **Hephaestus** | gpt-5.4 medium | 0.1 | all | — | Autonomous deep worker |
-| **Oracle** | gpt-5.4 high | 0.1 | subagent | gemini-3.1-pro high → claude-opus-4-6 max | Read-only consultation |
-| **Librarian** | minimax-m2.7 | 0.1 | subagent | minimax-m2.7-highspeed → claude-haiku-4-5 → gpt-5-nano | External docs/code search |
-| **Explore** | grok-code-fast-1 | 0.1 | subagent | minimax-m2.7-highspeed → minimax-m2.7 → claude-haiku-4-5 → gpt-5-nano | Contextual grep |
-| **Multimodal-Looker** | gpt-5.3-codex medium | 0.1 | subagent | k2p5 → gemini-3-flash → glm-4.6v → gpt-5-nano | PDF/image analysis |
-| **Metis** | claude-opus-4-6 max | **0.3** | subagent | gpt-5.4 high → gemini-3.1-pro high | Pre-planning consultant |
-| **Momus** | gpt-5.4 xhigh | 0.1 | subagent | claude-opus-4-6 max → gemini-3.1-pro high | Plan reviewer |
-| **Atlas** | claude-sonnet-4-6 | 0.1 | primary | gpt-5.4 medium | Todo-list orchestrator |
-| **Prometheus** | claude-opus-4-6 max | 0.1 | — | gpt-5.4 high → gemini-3.1-pro | Strategic planner (internal) |
-| **Sisyphus-Junior** | claude-sonnet-4-6 | 0.1 | all | user-configurable | Category-spawned executor |
+| Agent | Role | Model | Mode | Purpose |
+|-------|------|-------|------|---------|
+| **Sisyphus** | Research Director | qwen3.5-plus | primary | Main orchestrator, plans + delegates research waves |
+| **Hephaestus** | Deep Researcher | glm-5 | subagent | Autonomous end-to-end research with thorough exploration |
+| **Oracle** | Insight Analyst | qwen3-max | subagent | Synthesizes findings into actionable insights |
+| **Librarian** | Industry Researcher | qwen3-coder-plus | subagent | External research: benchmarks, papers, reports |
+| **Explore** | Web Scout | qwen3-coder-next | subagent | Web search: social media, forums, reviews |
+| **Multimodal-Looker** | Visual Analyst | kimi-k2.5 | subagent | Image/visual UX analysis |
+| **Metis** | Research Consultant | qwen3-coder-next | subagent | Research optimization and refinement |
+| **Momus** | Plan Reviewer | glm-4.7 | subagent | Research plan quality review |
+| **Atlas** | Master Orchestrator | qwen3.5-plus | primary | Full context coordination |
+| **Prometheus** | Research Planner | qwen3-coder-plus | subagent | Strategic research planning |
+| **Sisyphus-Junior** | Research Assistant | kimi-k2.5 | all | Category-spawned research executor |
 
 ## TOOL RESTRICTIONS
 
 | Agent | Denied Tools |
 |-------|-------------|
-| Oracle | write, edit, task, call_omo_agent |
-| Librarian | write, edit, task, call_omo_agent |
-| Explore | write, edit, task, call_omo_agent |
-| Multimodal-Looker | ALL except read |
-| Atlas | task, call_omo_agent |
+| Oracle | edit, task |
+| Librarian | edit, task, call_omo_agent |
+| Explore | edit, task, call_omo_agent |
 | Momus | write, edit, task |
+| Atlas | task, call_omo_agent |
 
 ## STRUCTURE
 
 ```
 agents/
-├── sisyphus.ts            # 559 LOC, main orchestrator
-├── hephaestus.ts          # 507 LOC, autonomous worker
-├── oracle.ts              # Read-only consultant
-├── librarian.ts           # External search
-├── explore.ts             # Codebase grep
-├── multimodal-looker.ts   # Vision/PDF
-├── metis.ts               # Pre-planning
-├── momus.ts               # Plan review
-├── atlas/agent.ts         # Todo orchestrator
-├── types.ts               # AgentFactory, AgentMode
-├── agent-builder.ts       # buildAgent() composition
-├── utils.ts               # Agent utilities
-├── builtin-agents.ts      # createBuiltinAgents() registry
-└── builtin-agents/        # maybeCreateXXXConfig conditional factories
-    ├── sisyphus-agent.ts
-    ├── hephaestus-agent.ts
-    ├── atlas-agent.ts
-    ├── general-agents.ts  # collectPendingBuiltinAgents
-    └── available-skills.ts
+├── sisyphus/                # Research Director (default.ts, gpt-5-4.ts)
+├── hephaestus/              # Deep Researcher (gpt.ts, gpt-5-3-codex.ts, gpt-5-4.ts, agent.ts)
+├── oracle.ts                # Insight Analyst
+├── librarian.ts             # Industry Researcher
+├── explore.ts               # Web Scout
+├── multimodal-looker.ts     # Visual Analyst
+├── metis.ts                 # Research Consultant
+├── momus.ts                 # Plan Reviewer
+├── atlas/                   # Master Orchestrator
+├── prometheus/              # Research Planner
+├── sisyphus-junior/         # Research Assistant
+├── types.ts                 # AgentFactory, AgentMode
+├── agent-builder.ts         # buildAgent() composition
+├── utils.ts                 # Agent utilities
+├── builtin-agents.ts        # createBuiltinAgents() registry
+├── builtin-agents/          # maybeCreateXXXConfig conditional factories
+├── dynamic-agent-prompt-builder.ts  # Prompt composition
+└── model-requirements.ts    # Fallback chains (bailian-coding-plan)
 ```
 
 ## FACTORY PATTERN
@@ -70,7 +68,7 @@ const createXXXAgent: AgentFactory = (model: string) => ({
 createXXXAgent.mode = "subagent" // or "primary" or "all"
 ```
 
-Model resolution: 4-step: override → category-default → provider-fallback → system-default. Defined in `shared/model-requirements.ts`.
+Model resolution: 4-step: override → category-default → provider-fallback → system-default. All models use `bailian-coding-plan` provider.
 
 ## MODES
 

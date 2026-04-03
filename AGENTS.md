@@ -1,72 +1,128 @@
-# oh-my-opencode — O P E N C O D E Plugin
+# oh-my-openbusiness — Autonomous UX Research System
 
-**Generated:** 2026-03-06 | **Commit:** 7fe44024 | **Branch:** dev
+**Generated:** 2026-04-03 | **Branch:** dev
 
 ## OVERVIEW
 
-OpenCode plugin (npm: `oh-my-opencode`) that extends Claude Code (OpenCode fork) with multi-agent orchestration, 48 lifecycle hooks, 26 tools, skill/command/MCP systems, and Claude Code compatibility. 1268 TypeScript files, 160k LOC.
+OpenCode plugin (npm: `oh-my-opencode`) that transforms OpenCode into an autonomous UX Research system. Extracts user feedback from the web (social media, forums, reviews, blogs), synthesizes findings into actionable insights, and produces research deliverables (reports, personas, journey maps).
 
-## STRUCTURE
+## ARCHITECTURE
 
 ```
-oh-my-opencode/
+oh-my-openbusiness/
 ├── src/
 │   ├── index.ts              # Plugin entry: loadConfig → createManagers → createTools → createHooks → createPluginInterface
-│   ├── plugin-config.ts      # JSONC multi-level config: user → project → defaults (Zod v4)
-│   ├── agents/               # 11 agents (Sisyphus, Hephaestus, Oracle, Librarian, Explore, Atlas, Prometheus, Metis, Momus, Multimodal-Looker, Sisyphus-Junior)
-│   ├── hooks/                # 48 lifecycle hooks across dedicated modules and standalone files
-│   ├── tools/                # 26 tools across 15 directories
-│   ├── features/             # 19 feature modules (background-agent, skill-loader, tmux, MCP-OAuth, etc.)
-│   ├── shared/               # 95+ utility files in 13 categories
-│   ├── config/               # Zod v4 schema system (24 files)
-│   ├── cli/                  # CLI: install, run, doctor, mcp-oauth (Commander.js)
-│   ├── mcp/                  # 3 built-in remote MCPs (websearch, context7, grep_app)
-│   ├── plugin/               # 8 OpenCode hook handlers + 48 hook composition
-│   └── plugin-handlers/      # 6-phase config loading pipeline
-├── packages/                 # Monorepo: cli-runner, 12 platform binaries
-└── local-ignore/             # Dev-only test fixtures
+│   ├── plugin-config.ts      # JSONC multi-level config: project → user → defaults (Zod)
+│   ├── agents/               # 11 UX Research agents (Sisyphus, Hephaestus, Oracle, Librarian, Explore, Atlas, Prometheus, Metis, Momus, Multimodal-Looker, Sisyphus-Junior)
+│   ├── hooks/                # Lifecycle hooks for research memory, context management, session recovery
+│   ├── tools/                # Research tools (delegate-task, skill, skill-mcp, background tools, session manager)
+│   ├── features/             # Feature modules (background-agent, builtin-skills, builtin-commands, skill-mcp-manager)
+│   ├── shared/               # Shared utilities
+│   ├── config/               # Zod schema system
+│   ├── cli/                  # CLI: install, run, doctor, mcp-oauth
+│   ├── mcp/                  # 13 built-in remote MCPs for web research
+│   ├── plugin/               # OpenCode hook handlers + hook composition
+│   └── plugin-handlers/      # Config loading pipeline
+├── .opencode/
+│   ├── skills/               # 7 UX Research skills (web-scraper, social-listener, sentiment-analyzer, persona-builder, journey-mapper, ux-heuristics, research-methodology)
+│   └── command/              # Research commands (start-research, research-loop)
+├── .sisyphus/
+│   ├── plans/                # Research plans (checkout-abandonment.md)
+│   ├── drafts/               # Draft reports
+│   ├── findings/             # Persistent research findings
+│   ├── deliverables/         # Generated reports, personas, journey maps
+│   └── research-memory/      # Cross-session research memory
+└── README.md
 ```
+
+## RESEARCH FLOW
+
+```
+/start-research <topic>
+  ├─→ Sisyphus (Research Director) receives request
+  ├─→ Wave 1: Broad Discovery (parallel explore + librarian agents)
+  │   ├─→ Explore (Web Scout) → Reddit, X/Twitter, forums, reviews
+  │   ├─→ Librarian (Industry Researcher) → benchmarks, papers, reports
+  │   └─→ Collect findings with quotes, sources, sentiment
+  ├─→ Wave 2: Deep Dive (targeted research into identified patterns)
+  ├─→ Wave 3: Validation & Triangulation (cross-validate findings)
+  ├─→ Wave 4: Synthesis (thematic analysis, personas, journey maps)
+  ├─→ Wave 5: Recommendations (prioritized, evidence-backed actions)
+  └─→ Deliver: Research report with executive summary, findings, recommendations
+```
+
+## 11 UX RESEARCH AGENTS
+
+| Agent | Role | Model | Type |
+|-------|------|-------|------|
+| **Sisyphus** | Research Director — orchestrates multi-wave research | qwen3.5-plus | primary |
+| **Hephaestus** | Deep Researcher — autonomous end-to-end research | glm-5 | subagent |
+| **Oracle** | Insight Analyst — synthesizes findings into insights | qwen3-max | subagent |
+| **Librarian** | Industry Researcher — benchmarks, papers, reports | qwen3-coder-plus | subagent |
+| **Explore** | Web Scout — social media, forums, reviews | qwen3-coder-next | subagent |
+| **Atlas** | Master Orchestrator — full context coordination | qwen3.5-plus | primary |
+| **Prometheus** | Research Planner — large-scale research planning | qwen3-coder-plus | subagent |
+| **Metis** | Research Consultant — optimization and refinement | qwen3-coder-next | subagent |
+| **Momus** | Plan Reviewer — quality analysis with reasoning | glm-4.7 | subagent |
+| **Sisyphus-Junior** | Research Assistant — multimodal research | kimi-k2.5 | subagent |
+| **Multimodal-Looker** | Visual Analyst — image/visual UX analysis | kimi-k2.5 | subagent |
+
+## 10 BUILT-IN SKILLS (TypeScript)
+
+| Skill | Purpose |
+|-------|---------|
+| **web-scraper** | Autonomous web scraping for UX research |
+| **social-listener** | Social media and forum monitoring |
+| **sentiment-analyzer** | 3-phase sentiment analysis protocol |
+| **persona-builder** | Data-driven persona creation |
+| **journey-mapper** | Customer journey map generation |
+| **ux-heuristics** | Nielsen's 10 heuristics evaluation |
+| **research-methodology** | GDS 4-phase research framework |
+| **competitor-analyst** | Competitive UX benchmarking |
+| **data-triangulator** | Cross-validate findings across sources |
+| **research-architect** | Multi-wave research plan design |
+
+## 13 MCPs (Web Research)
+
+| MCP | Source | Purpose |
+|-----|--------|---------|
+| **websearch** | Exa/Tavily | General web search |
+| **reddit** | Reddit API | Reddit posts and comments |
+| **x-twitter** | X/Twitter API | Tweets and threads |
+| **semantic-scholar** | Semantic Scholar API | Academic papers |
+| **playwright** | Playwright MCP | Browser automation, screenshots |
+| **nlp-api** | Apify | Sentiment analysis, NER |
+| **google-analytics** | Google Analytics API | Behavioral data |
+| **appstore-reviews** | Apify | App Store/Play Store reviews |
+| **academic-search** | Academic sources | Research papers |
+| **social-search** | Social platforms | Social media search |
+| **webpage-extractor** | Jina Reader | Full article extraction |
+| **accessibility-scanner** | Accessibility API | WCAG audits |
+| **context7** | Context7 | Documentation lookup |
+
+## 8 RESEARCH CATEGORIES
+
+| Category | Model | Purpose |
+|----------|-------|---------|
+| **visual-audit** | kimi-k2.5 | Heuristic evaluation, visual analysis |
+| **thematic-analysis** | glm-5 | Pattern identification, coding |
+| **deep-research** | kimi-k2.5 | In-depth investigation |
+| **creative-insights** | qwen3.5-plus | Creative analysis, ideation |
+| **quick-lookup** | MiniMax-M2.5 | Fast fact-finding |
+| **content-coding** | glm-5 | Qualitative data coding |
+| **report-writing** | kimi-k2.5 | Research report generation |
+| **comprehensive-study** | qwen3.5-plus | Full research studies |
 
 ## INITIALIZATION FLOW
 
 ```
 OhMyOpenCodePlugin(ctx)
   ├─→ loadPluginConfig()         # JSONC parse → project/user merge → Zod validate → migrate
-  ├─→ createManagers()           # TmuxSessionManager, BackgroundManager, SkillMcpManager, ConfigHandler
-  ├─→ createTools()              # SkillContext + AvailableCategories + ToolRegistry (26 tools)
-  ├─→ createHooks()              # 3-tier: Core(39) + Continuation(7) + Skill(2) = 48 hooks
-  └─→ createPluginInterface()    # 8 OpenCode hook handlers → PluginInterface
+  ├─→ createManagers()           # BackgroundManager, SkillMcpManager, ConfigHandler
+  ├─→ createTools()              # SkillContext + AvailableCategories + ToolRegistry
+  ├─→ createHooks()              # Session + Tool-Guard + Transform + Continuation hooks
+  └─→ createPluginInterface()    # OpenCode hook handlers → PluginInterface
 ```
-
-## 8 OPENCODE HOOK HANDLERS
-
-| Handler | Purpose |
-|---------|---------|
-| `config` | 6-phase: provider → plugin-components → agents → tools → MCPs → commands |
-| `tool` | 26 registered tools |
-| `chat.message` | First-message variant, session setup, keyword detection |
-| `chat.params` | Anthropic effort level adjustment |
-| `chat.headers` | Copilot x-initiator header injection |
-| `event` | Session lifecycle (created, deleted, idle, error) |
-| `tool.execute.before` | Pre-tool hooks (file guard, label truncator, rules injector) |
-| `tool.execute.after` | Post-tool hooks (output truncation, metadata store) |
-| `experimental.chat.messages.transform` | Context injection, thinking block validation |
-
-## WHERE TO LOOK
-
-| Task | Location | Notes |
-|------|----------|-------|
-| Add new agent | `src/agents/` + `src/agents/builtin-agents/` | Follow createXXXAgent factory pattern |
-| Add new hook | `src/hooks/{name}/` + register in `src/plugin/hooks/create-*-hooks.ts` | Match event type to tier |
-| Add new tool | `src/tools/{name}/` + register in `src/plugin/tool-registry.ts` | Follow createXXXTool factory |
-| Add new feature module | `src/features/{name}/` | Standalone module, wire in plugin/ |
-| Add new MCP | `src/mcp/` + register in `createBuiltinMcps()` | Remote HTTP only |
-| Add new skill | `src/features/builtin-skills/skills/` | Implement BuiltinSkill interface |
-| Add new command | `src/features/builtin-commands/` | Template in templates/ |
-| Add new CLI command | `src/cli/cli-program.ts` | Commander.js subcommand |
-| Add new doctor check | `src/cli/doctor/checks/` | Register in checks/index.ts |
-| Modify config schema | `src/config/schema/` + update root schema | Zod v4, add to OhMyOpenCodeConfigSchema |
-| Add new category | `src/tools/delegate-task/constants.ts` | DEFAULT_CATEGORIES + CATEGORY_MODEL_REQUIREMENTS |
 
 ## MULTI-LEVEL CONFIG
 
@@ -74,36 +130,20 @@ OhMyOpenCodePlugin(ctx)
 Project (.opencode/oh-my-opencode.jsonc)  →  User (~/.config/opencode/oh-my-opencode.jsonc)  →  Defaults
 ```
 
-- `agents`, `categories`, `claude_code`: deep merged recursively
+- `agents`, `categories`: deep merged recursively
 - `disabled_*` arrays: Set union (concatenated + deduplicated)
-- All other fields: override replaces base value
 - Zod `safeParse()` fills defaults for omitted fields
-- `migrateConfigFile()` transforms legacy keys automatically
-
-Fields: agents (14 overridable, 21 fields each), categories (8 built-in + custom), disabled_* arrays (agents, hooks, mcps, skills, commands, tools), 19 feature-specific configs.
-
-## THREE-TIER MCP SYSTEM
-
-| Tier | Source | Mechanism |
-|------|--------|-----------|
-| Built-in | `src/mcp/` | 3 remote HTTP: websearch (Exa/Tavily), context7, grep_app |
-| Claude Code | `.mcp.json` | `${VAR}` env expansion via claude-code-mcp-loader |
-| Skill-embedded | SKILL.md YAML | Managed by SkillMcpManager (stdio + HTTP) |
 
 ## CONVENTIONS
 
 - **Runtime**: Bun only — never use npm/yarn
-- **TypeScript**: strict mode, ESNext, bundler moduleResolution, `bun-types` (never `@types/node`)
-- **Test pattern**: Bun test (`bun:test`), co-located `*.test.ts`, given/when/then style (nested describe with `#given`/`#when`/`#then` prefixes)
-- **CI test split**: mock-heavy tests run in isolation (separate `bun test` processes), rest in batch
+- **TypeScript**: strict mode, ESNext, bundler moduleResolution, `bun-types`
+- **Test pattern**: Bun test (`bun:test`), co-located `*.test.ts`, given/when/then style
 - **Factory pattern**: `createXXX()` for all tools, hooks, agents
-- **Hook tiers**: Session (23) → Tool-Guard (12) → Transform (4) → Continuation (7) → Skill (2)
-- **Agent modes**: `primary` (respects UI model) vs `subagent` (own fallback chain) vs `all`
-- **Model resolution**: 4-step: override → category-default → provider-fallback → system-default
-- **Config format**: JSONC with comments, Zod v4 validation, snake_case keys
+- **Agent modes**: `primary` (user-facing) vs `subagent` (delegated)
+- **Config format**: JSONC with comments, Zod validation, snake_case keys
 - **File naming**: kebab-case for all files/directories
-- **Module structure**: index.ts barrel exports, no catch-all files (utils.ts, helpers.ts banned), 200 LOC soft limit
-- **Imports**: relative within module, barrel imports across modules (`import { log } from "./shared"`)
+- **Imports**: relative within module, barrel imports across modules
 - **No path aliases**: no `@/` — relative imports only
 
 ## ANTI-PATTERNS
@@ -115,10 +155,8 @@ Fields: agents (14 overridable, 21 fields each), categories (8 built-in + custom
 - Never run `bun publish` directly — use GitHub Actions
 - Never modify `package.json` version locally
 - Test: given/when/then — never use Arrange-Act-Assert comments
-- Comments: avoid AI-generated comment patterns (enforced by comment-checker hook)
 - Never create catch-all files (`utils.ts`, `helpers.ts`, `service.ts`)
 - Empty catch blocks `catch(e) {}` — always handle errors
-- Never use em dashes (—), en dashes (–), or AI filler phrases in generated content
 - index.ts is entry point ONLY — never dump business logic there
 
 ## COMMANDS
@@ -133,25 +171,9 @@ bunx oh-my-opencode doctor  # Health diagnostics
 bunx oh-my-opencode run     # Non-interactive session
 ```
 
-## CI/CD
-
-| Workflow | Trigger | Purpose |
-|----------|---------|---------|
-| ci.yml | push/PR to master/dev | Tests (split: mock-heavy isolated + batch), typecheck, build, schema auto-commit |
-| publish.yml | manual dispatch | Version bump, npm publish, platform binaries, GitHub release, merge to master |
-| publish-platform.yml | called by publish | 12 platform binaries via bun compile (darwin/linux/windows) |
-| sisyphus-agent.yml | @mention / dispatch | AI agent handles issues/PRs |
-| cla.yml | issue_comment/PR | CLA assistant for contributors |
-| lint-workflows.yml | push to .github/ | actionlint + shellcheck on workflow files |
-
 ## NOTES
 
 - Logger writes to `/tmp/oh-my-opencode.log` — check there for debugging
 - Background tasks: 5 concurrent per model/provider (configurable)
-- Plugin load timeout: 10s for Claude Code plugins
-- Model fallback priority: Claude > OpenAI > Gemini > Copilot > OpenCode Zen > Z.ai > Kimi
-- Config migration runs automatically on legacy keys (agent names, hook names, model versions)
-- Build: bun build (ESM) + tsc --emitDeclarationOnly, externals: @ast-grep/napi
-- Test setup: `test-setup.ts` preloaded via bunfig.toml, mock-heavy tests run in isolation in CI
-- 98 barrel export files (index.ts) establish module boundaries
-- Architecture rules enforced via `.sisyphus/rules/modular-code-enforcement.md`
+- Model fallback: bailian-coding-plan provider with 8 models
+- Build: bun build (ESM) + tsc --emitDeclarationOnly

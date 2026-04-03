@@ -1,10 +1,10 @@
-# src/plugin/ — 8 OpenCode Hook Handlers + Hook Composition
+# src/plugin/ — OpenCode Hook Handlers + Hook Composition
 
-**Generated:** 2026-03-06
+**Generated:** 2026-04-03
 
 ## OVERVIEW
 
-Core glue layer. 20 source files assembling the 8 OpenCode hook handlers and composing 48 hooks into the PluginInterface. Every handler file corresponds to one OpenCode hook type.
+Core glue layer. Assembles OpenCode hook handlers and composes lifecycle hooks into the PluginInterface.
 
 ## HANDLER FILES
 
@@ -12,11 +12,11 @@ Core glue layer. 20 source files assembling the 8 OpenCode hook handlers and com
 |------|---------------|---------|
 | `chat-message.ts` | `chat.message` | First-message variant, session setup, keyword detection |
 | `chat-params.ts` | `chat.params` | Anthropic effort level, think mode |
-| `event.ts` | `event` | Session lifecycle (created, deleted, idle, error) |
+| `event.ts` | `event` | Session lifecycle (created, deleted, idle, error), research memory hook |
 | `tool-execute-before.ts` | `tool.execute.before` | Pre-tool guards (file guard, label truncator, rules injector) |
 | `tool-execute-after.ts` | `tool.execute.after` | Post-tool hooks (output truncation, comment checker, metadata) |
 | `messages-transform.ts` | `experimental.chat.messages.transform` | Context injection, thinking block validation |
-| `tool-registry.ts` | `tool` | 26 tools assembled from factories |
+| `tool-registry.ts` | `tool` | Research tools assembled from factories |
 | `chat-headers.ts` | `chat.headers` | Copilot x-initiator header injection |
 | `skill-context.ts` | — | Skill/browser/category context for tool creation |
 
@@ -24,10 +24,10 @@ Core glue layer. 20 source files assembling the 8 OpenCode hook handlers and com
 
 | File | Tier | Count |
 |------|------|-------|
-| `create-session-hooks.ts` | Session | 23 |
-| `create-tool-guard-hooks.ts` | Tool Guard | 12 |
+| `create-session-hooks.ts` | Session | 19 |
+| `create-tool-guard-hooks.ts` | Tool Guard | 13 |
 | `create-skill-hooks.ts` | Skill | 2 |
-| `create-core-hooks.ts` | Aggregator | Session + Guard + Transform = 39 |
+| `create-core-hooks.ts` | Aggregator | Session + Guard + Transform |
 
 ## SUPPORT FILES
 
@@ -39,8 +39,6 @@ Core glue layer. 20 source files assembling the 8 OpenCode hook handlers and com
 | `recent-synthetic-idles.ts` | Dedup rapid idle events |
 | `unstable-agent-babysitter.ts` | Track unstable agent behavior across sessions |
 | `types.ts` | `PluginContext`, `PluginInterface`, `ToolsRecord`, `TmuxConfig` |
-| `ultrawork-model-override.ts` | Ultrawork mode model override logic |
-| `ultrawork-db-model-override.ts` | DB-level model override for ultrawork |
 | `config-handler.ts` | Runtime config loading and caching |
 
 ## KEY PATTERNS
