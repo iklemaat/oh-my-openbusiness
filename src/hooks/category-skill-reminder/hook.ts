@@ -24,8 +24,6 @@ const DELEGATABLE_WORK_TOOLS = new Set([
   "write",
   "bash",
   "read",
-  "grep",
-  "glob",
 ])
 
 /**
