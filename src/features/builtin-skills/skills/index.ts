@@ -1,4 +1,4 @@
-export { playwrightSkill, agentBrowserSkill } from "./playwright"
+export { playwrightSkill } from "./playwright"
 export { playwrightCliSkill } from "./playwright-cli"
 export { webScraperSkill } from "./web-scraper"
 export { socialListenerSkill } from "./social-listener"

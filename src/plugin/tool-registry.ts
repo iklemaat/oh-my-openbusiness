@@ -14,9 +14,6 @@ import {
   createLookAt,
   createSkillMcpTool,
   createSkillTool,
-  createGrepTools,
-  createGlobTools,
-  createAstGrepTools,
   createSessionManagerTools,
   createDelegateTask,
   discoverCommandsSync,
@@ -25,7 +22,6 @@ import {
   createTaskGetTool,
   createTaskList,
   createTaskUpdateTool,
-  createHashlineEditTool,
 } from "../tools"
 import { getMainSessionID } from "../features/claude-code-session-state"
 import { filterDisabledTools } from "../shared/disabled-tools"
@@ -55,19 +51,9 @@ const LOW_PRIORITY_TOOL_ORDER = [
   "background_output",
   "background_cancel",
   "edit",
-  "ast_grep_replace",
-  "ast_grep_search",
-  "glob",
-  "grep",
   "skill_mcp",
   "skill",
   "task",
-  "lsp_rename",
-  "lsp_prepare_rename",
-  "lsp_find_references",
-  "lsp_goto_definition",
-  "lsp_symbols",
-  "lsp_diagnostics",
 ] as const
 
 export function trimToolsToCap(filteredTools: ToolsRecord, maxTools: number): void {
@@ -126,8 +112,6 @@ export function createToolRegistry(args: {
     directory: ctx.directory,
     userCategories: pluginConfig.categories,
     agentOverrides: pluginConfig.agents,
-    gitMasterConfig: pluginConfig.git_master,
-    sisyphusJuniorModel: pluginConfig.agents?.["sisyphus-junior"]?.model,
     browserProvider: skillContext.browserProvider,
     disabledSkills: skillContext.disabledSkills,
     availableCategories,
@@ -170,12 +154,10 @@ export function createToolRegistry(args: {
     skills: skillContext.mergedSkills,
     mcpManager: managers.skillMcpManager,
     getSessionID: getSessionIDForMcp,
-    gitMasterConfig: pluginConfig.git_master,
     browserProvider: skillContext.browserProvider,
     nativeSkills: "skills" in ctx ? (ctx as { skills: SkillLoadOptions["nativeSkills"] }).skills : undefined,
   })
 
-  // task_system defaults to true since v3.14 — delegation (oracle, subagents) requires it
   const taskSystemEnabled = pluginConfig.experimental?.task_system ?? true
   const taskToolsRecord: Record<string, ToolDefinition> = taskSystemEnabled
     ? {
@@ -186,16 +168,8 @@ export function createToolRegistry(args: {
       }
     : {}
 
-  const hashlineEnabled = pluginConfig.hashline_edit ?? false
-  const hashlineToolsRecord: Record<string, ToolDefinition> = hashlineEnabled
-    ? { edit: createHashlineEditTool(ctx) }
-    : {}
-
   const allTools: Record<string, ToolDefinition> = {
     ...builtinTools,
-    ...createGrepTools(ctx),
-    ...createGlobTools(ctx),
-    ...createAstGrepTools(ctx),
     ...createSessionManagerTools(ctx),
     ...backgroundTools,
     call_omo_agent: callOmoAgent,
@@ -205,7 +179,6 @@ export function createToolRegistry(args: {
     skill: skillTool,
     interactive_bash,
     ...taskToolsRecord,
-    ...hashlineToolsRecord,
   }
 
   for (const toolDefinition of Object.values(allTools)) {

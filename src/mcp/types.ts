@@ -5,15 +5,13 @@ export const McpNameSchema = z.enum([
   "semantic-scholar",
   "reddit",
   "playwright",
-  "accessibility-scanner",
   "x-twitter",
   "nlp-api",
   "google-analytics",
   "appstore-reviews",
-  "context7",
-  "grep_app",
   "academic-search",
   "social-search",
+  "webpage-extractor",
 ])
 
 export type McpName = z.infer<typeof McpNameSchema>

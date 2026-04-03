@@ -32,7 +32,6 @@ import { extractRetryAttempt, normalizeRetryStatusMessage } from "../shared/retr
 import { clearSessionModel, getSessionModel, setSessionModel } from "../shared/session-model-state";
 import { clearSessionPromptParams } from "../shared/session-prompt-params-state";
 import { deleteSessionTools } from "../shared/session-tools-store";
-import { lspManager } from "../tools";
 
 import type { CreatedHooks } from "../create-hooks";
 import type { Managers } from "../create-managers";
@@ -402,7 +401,6 @@ export function createEventHandler(args: {
         }
         deleteSessionTools(sessionInfo.id);
         await managers.skillMcpManager.disconnectSession(sessionInfo.id);
-        await lspManager.cleanupTempDirectoryClients();
         await managers.tmuxSessionManager.onSessionDeleted({
           sessionID: sessionInfo.id,
         });

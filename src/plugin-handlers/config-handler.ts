@@ -8,7 +8,6 @@ import { applyMcpConfig } from "./mcp-config-handler";
 import { applyProviderConfig } from "./provider-config-handler";
 import { loadPluginComponents } from "./plugin-components-loader";
 import { applyToolConfig } from "./tool-config-handler";
-import { clearFormatterCache } from "../tools/hashline-edit/formatter-trigger"
 
 export { resolveCategoryConfig } from "./category-config-resolver";
 
@@ -26,7 +25,6 @@ export function createConfigHandler(deps: ConfigHandlerDeps) {
 
     setAdditionalAllowedMcpEnvVars(pluginConfig.mcp_env_allowlist ?? [])
     applyProviderConfig({ config, modelCacheState });
-    clearFormatterCache()
 
     const pluginComponents = await loadPluginComponents({ pluginConfig });
 

@@ -2,15 +2,13 @@ import { createWebsearchConfig } from "./websearch"
 import { semantic_scholar } from "./semantic-scholar"
 import { reddit } from "./reddit"
 import { playwright } from "./playwright"
-import { accessibility_scanner } from "./accessibility-scanner"
 import { x_twitter } from "./x-twitter"
 import { nlp_api } from "./nlp-api"
 import { google_analytics } from "./google-analytics"
 import { appstore_reviews } from "./appstore-reviews"
-import { context7 } from "./context7"
-import { grep_app } from "./grep-app"
 import { academic_search } from "./academic-search"
 import { social_search } from "./social-search"
+import { webpage_extractor } from "./webpage-extractor"
 import type { OhMyOpenCodeConfig } from "../config/schema"
 
 export { McpNameSchema, type McpName } from "./types"
@@ -45,10 +43,6 @@ export function createBuiltinMcps(disabledMcps: string[] = [], config?: OhMyOpen
     mcps.playwright = playwright
   }
 
-  if (!disabledMcps.includes("accessibility-scanner")) {
-    mcps["accessibility-scanner"] = accessibility_scanner
-  }
-
   if (!disabledMcps.includes("x-twitter")) {
     mcps["x-twitter"] = x_twitter
   }
@@ -65,20 +59,16 @@ export function createBuiltinMcps(disabledMcps: string[] = [], config?: OhMyOpen
     mcps["appstore-reviews"] = appstore_reviews
   }
 
-  if (!disabledMcps.includes("context7")) {
-    mcps["context7"] = context7
-  }
-
-  if (!disabledMcps.includes("grep_app")) {
-    mcps["grep_app"] = grep_app
-  }
-
   if (!disabledMcps.includes("academic-search")) {
     mcps["academic-search"] = academic_search
   }
 
   if (!disabledMcps.includes("social-search")) {
     mcps["social-search"] = social_search
+  }
+
+  if (!disabledMcps.includes("webpage-extractor")) {
+    mcps["webpage-extractor"] = webpage_extractor
   }
 
   return mcps
