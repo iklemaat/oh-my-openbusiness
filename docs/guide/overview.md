@@ -1,10 +1,10 @@
-# What Is Oh My OpenAgent?
+# What Is Oh My OpenBusiness?
 
-Oh My OpenAgent is a multi-model agent orchestration harness for OpenCode. It transforms a single AI agent into a coordinated development team that actually ships code.
+Oh My OpenBusiness is a multi-model agent orchestration harness for OpenCode. It transforms a single AI agent into a coordinated UX research team that delivers validated findings.
 
 Not locked to Claude. Not locked to OpenAI. Not locked to anyone.
 
-Just better results, cheaper models, real orchestration.
+Just better research, smarter model routing, real orchestration.
 
 ---
 
@@ -15,23 +15,22 @@ Just better results, cheaper models, real orchestration.
 Paste this into your LLM agent session:
 
 ```
-Install and configure oh-my-openagent by following the instructions here:
-https://raw.githubusercontent.com/code-yeongyu/oh-my-openagent/refs/heads/dev/docs/guide/installation.md
+Install and configure oh-my-openbusiness by following the instructions in the docs.
 ```
 
 Or read the full [Installation Guide](./installation.md) for manual setup, provider authentication, and troubleshooting.
 
-### Your First Task
+### Your First Research
 
 Once installed, just type:
 
 ```
-ultrawork
+/start-research checkout abandonment
 ```
 
-That's it. The agent figures everything out — explores your codebase, researches patterns, implements the feature, verifies with diagnostics. Keeps working until done.
+That's it. The agent figures everything out — discovers sources, extracts user feedback, synthesizes findings, produces deliverables. Keeps researching until every question is answered.
 
-Want more control? Press **Tab** to enter [Prometheus mode](./orchestration.md) for interview-based planning, then run `/start-work` for full orchestration.
+Want more control? Press **Tab** to enter [Prometheus mode](./orchestration.md) for interview-based research planning, then run `/start-research` for full orchestration.
 
 ---
 
@@ -41,32 +40,32 @@ We used to call this "Claude Code on steroids." That was wrong.
 
 This isn't about making Claude Code better. It's about breaking free from the idea that one model, one provider, one way of working is enough. Anthropic wants you locked in. OpenAI wants you locked in. Everyone wants you locked in.
 
-Oh My OpenAgent doesn't play that game. It orchestrates across models, picking the right brain for the right job. Claude for orchestration. GPT for deep reasoning. Gemini for frontend. GPT-5.4 Mini for quick tasks. All working together, automatically.
+Oh My OpenBusiness doesn't play that game. It orchestrates across models, picking the right brain for the right job. Qwen3.5 Plus for orchestration. GLM-5 for deep reasoning. Kimi K2.5 for multimodal analysis. MiniMax M2.5 for quick tasks. All working together, automatically.
 
 ---
 
 ## How It Works: Agent Orchestration
 
-Instead of one agent doing everything, Oh My OpenAgent uses **specialized agents that delegate to each other** based on task type.
+Instead of one agent doing everything, Oh My OpenBusiness uses **specialized agents that delegate to each other** based on research task type.
 
 **The Architecture:**
 
 ```
-User Request
+User Research Request
     ↓
-[Intent Gate] — Classifies what you actually want
+[Intent Gate] — Classifies research intent
     ↓
-[Sisyphus] — Main orchestrator, plans and delegates
+[Sisyphus] — Research Director, plans and delegates
     ↓
-    ├─→ [Prometheus] — Strategic planning (interview mode)
-    ├─→ [Atlas] — Todo orchestration and execution
-    ├─→ [Oracle] — Architecture consultation
-    ├─→ [Librarian] — Documentation/code search
-    ├─→ [Explore] — Fast codebase grep
-    └─→ [Category-based agents] — Specialized by task type
+    ├─→ [Prometheus] — Research planning (interview mode)
+    ├─→ [Atlas] — Research orchestration and execution
+    ├─→ [Oracle] — Insight synthesis and analysis
+    ├─→ [Librarian] — Industry research and benchmarks
+    ├─→ [Explore] — Web and social media scouting
+    └─→ [Category-based agents] — Specialized by research type
 ```
 
-When Sisyphus delegates to a subagent, it doesn't pick a model name. It picks a **category** — `visual-engineering`, `ultrabrain`, `quick`, `deep`. The category automatically maps to the right model. You touch nothing.
+When Sisyphus delegates to a subagent, it doesn't pick a model name. It picks a **category** — `visual-audit`, `thematic-analysis`, `deep-research`, `creative-insights`. The category automatically maps to the right model. You touch nothing.
 
 For a deep dive into how agents collaborate, see the [Orchestration System Guide](./orchestration.md).
 
@@ -74,59 +73,56 @@ For a deep dive into how agents collaborate, see the [Orchestration System Guide
 
 ## Meet the Agents
 
-### Sisyphus: The Discipline Agent
+### Sisyphus: The Research Director
 
 Named after the Greek myth. He rolls the boulder every day. Never stops. Never gives up.
 
-Sisyphus is your main orchestrator. He plans, delegates to specialists, and drives tasks to completion with aggressive parallel execution. He doesn't stop halfway. He doesn't get distracted. He finishes.
+Sisyphus is your main orchestrator. He plans research, delegates to specialists, and drives findings to completion with aggressive parallel execution. He doesn't stop halfway. He doesn't get distracted. He finishes.
 
 **Recommended models:**
 
-- **Claude Opus 4.6** — Best overall experience. Sisyphus was built with Claude-optimized prompts.
-- **Claude Sonnet 4.6** — Good balance of capability and cost.
-- **Kimi K2.5** — Great Claude-like alternative. Many users run this combo exclusively.
-- **GLM 5** — Solid option, especially via Z.ai.
+- **Qwen3.5 Plus** — Best overall. 1M context, multimodal, thinking enabled.
+- **Kimi K2.5** — Great multimodal alternative.
+- **GLM 5** — Solid option with strong reasoning.
 
-Sisyphus still works best on Claude-family models, Kimi, and GLM. GPT-5.4 now has a dedicated prompt path, but older GPT models are still a poor fit and should route to Hephaestus instead.
+Sisyphus works best on qwen3.5-plus. Other models route to Hephaestus for deep research.
 
-### Hephaestus: The Legitimate Craftsman
+### Hephaestus: The Deep Researcher
 
-Named with intentional irony. Anthropic blocked OpenCode from using their API because of this project. So the team built an autonomous GPT-native agent instead.
+Named with intentional irony. Hephaestus runs on GLM-5. Give him a research goal, not a recipe. He explores the web, extracts user feedback, and synthesizes findings end-to-end without hand-holding.
 
-Hephaestus runs on GPT-5.4. Give him a goal, not a recipe. He explores the codebase, researches patterns, and executes end-to-end without hand-holding. He is the legitimate craftsman because he was born from necessity, not privilege.
+Use Hephaestus when you need deep autonomous research, thorough exploration across multiple source types, or cross-domain knowledge synthesis.
 
-Use Hephaestus when you need deep architectural reasoning, complex debugging across many files, or cross-domain knowledge synthesis. Switch to him explicitly when the work demands GPT-5.4's particular strengths.
+**Why this beats single-model research:**
 
-**Why this beats vanilla Codex CLI:**
+- **Multi-model orchestration.** Single-model tools route everything to one model. OmO routes different research tasks to different models automatically. GLM-5 for deep reasoning. Qwen3.5 Plus for synthesis. MiniMax M2.5 for speed. The right brain for the right job.
+- **Background agents.** Fire 5+ agents in parallel. Something single-model tools simply cannot do. While one agent researches social media, another mines reviews, another scans forums. Like a real research team.
+- **Category system.** Research tasks are routed by intent, not model name. `thematic-analysis` gets GLM-5. `visual-audit` gets Kimi K2.5. `quick` gets MiniMax M2.5. No manual juggling.
+- **Accumulated wisdom.** Subagents learn from previous results. Patterns discovered in task 1 are passed to task 5. Mistakes made early aren't repeated. The system gets smarter as it works.
 
-- **Multi-model orchestration.** Pure Codex is single-model. OmO routes different tasks to different models automatically. GPT for deep reasoning. Gemini for frontend. GPT-5.4 Mini for speed. The right brain for the right job.
-- **Background agents.** Fire 5+ agents in parallel. Something Codex simply cannot do. While one agent writes code, another researches patterns, another checks documentation. Like a real dev team.
-- **Category system.** Tasks are routed by intent, not model name. `visual-engineering` gets Gemini. `ultrabrain` gets GPT-5.4. `quick` gets GPT-5.4 Mini. No manual juggling.
-- **Accumulated wisdom.** Subagents learn from previous results. Conventions discovered in task 1 are passed to task 5. Mistakes made early aren't repeated. The system gets smarter as it works.
+### Prometheus: The Research Planner
 
-### Prometheus: The Strategic Planner
+Prometheus interviews you like a real researcher. Asks clarifying questions. Identifies research scope and ambiguities. Builds a detailed research plan before a single source is consulted.
 
-Prometheus interviews you like a real engineer. Asks clarifying questions. Identifies scope and ambiguities. Builds a detailed plan before a single line of code is touched.
+Press **Tab** to enter Prometheus mode, or type `@plan "your research"` from Sisyphus.
 
-Press **Tab** to enter Prometheus mode, or type `@plan "your task"` from Sisyphus.
+### Atlas: The Research Conductor
 
-### Atlas: The Conductor
+Atlas executes Prometheus research plans. Distributes tasks to specialized subagents. Accumulates learnings across research waves. Verifies completion independently.
 
-Atlas executes Prometheus plans. Distributes tasks to specialized subagents. Accumulates learnings across tasks. Verifies completion independently.
+Run `/start-research` to activate Atlas on your latest research plan.
 
-Run `/start-work` to activate Atlas on your latest plan.
+### Oracle: The Insight Analyst
 
-### Oracle: The Consultant
-
-Read-only high-IQ consultant for architecture decisions and complex debugging. Consult Oracle when facing unfamiliar patterns, security concerns, or multi-system tradeoffs.
+High-IQ strategic consultant for research synthesis and complex analysis. Consult Oracle when facing contradictory findings, multi-source triangulation, or strategic pattern identification.
 
 ### Supporting Cast
 
-- **Metis** — Gap analyzer. Catches what Prometheus missed before plans are finalized.
-- **Momus** — Ruthless reviewer. Validates plans against clarity, verification, and context criteria.
-- **Explore** — Fast codebase grep. Uses speed-focused models for pattern discovery.
-- **Librarian** — Documentation and OSS code search. Stays current on library APIs and best practices.
-- **Multimodal Looker** — Vision and screenshot analysis.
+- **Metis** — Gap analyzer. Catches what Prometheus missed before research plans are finalized.
+- **Momus** — Ruthless reviewer. Validates research plans against clarity, verification, and context criteria.
+- **Explore** — Web and social media scout. Searches Reddit, X/Twitter, forums, reviews for user voices.
+- **Librarian** — Industry research and benchmarks. Stays current on research papers and best practices.
+- **Multimodal Looker** — Vision and visual UX analysis.
 
 ---
 
@@ -136,7 +132,7 @@ Read-only high-IQ consultant for architecture decisions and complex debugging. C
 
 Type `ultrawork` or just `ulw`. That's it.
 
-The agent figures everything out. Explores your codebase. Researches patterns. Implements the feature. Verifies with diagnostics. Keeps working until done.
+The agent figures everything out. Discovers relevant sources. Extracts user feedback. Synthesizes findings. Verifies through triangulation. Keeps researching until every question is answered.
 
 This is the "just do it" mode. Full automatic. You don't have to think deep because the agent thinks deep for you.
 
@@ -144,23 +140,21 @@ This is the "just do it" mode. Full automatic. You don't have to think deep beca
 
 Press **Tab** to enter Prometheus mode.
 
-Prometheus interviews you like a real engineer. Asks clarifying questions. Identifies scope and ambiguities. Builds a detailed plan before a single line of code is touched.
+Prometheus interviews you like a real researcher. Asks clarifying questions. Identifies research scope and ambiguities. Builds a detailed research plan before a single source is consulted.
 
-Then run `/start-work` and Atlas takes over. Tasks are distributed to specialized subagents. Each completion is verified independently. Learnings accumulate across tasks. Progress tracks across sessions.
+Then run `/start-research` and Atlas takes over. Tasks are distributed to specialized subagents. Each completion is verified independently. Learnings accumulate across research waves. Progress tracks across sessions.
 
-Use Prometheus for multi-day projects, critical production changes, complex refactoring, or when you want a documented decision trail.
+Use Prometheus for multi-week research projects, critical user studies, complex competitive analysis, or when you want a documented research trail.
 
 ---
 
 ## Agent Model Matching
 
-Different agents work best with different models. Oh My OpenAgent automatically assigns optimal models, but you can customize everything.
+Different agents work best with different models. Oh My OpenBusiness automatically assigns optimal models based on capabilities, but you can customize everything.
 
 ### Default Configuration
 
-Models are auto-configured at install time. The interactive installer asks which providers you have, then generates optimal model assignments for each agent and category.
-
-At runtime, fallback chains ensure work continues even if your preferred provider is down. Each agent has a provider priority chain. The system tries providers in order until it finds an available model.
+Models are auto-configured at install time. The system uses the bailian-coding-plan provider with 8 models. At runtime, fallback chains ensure research continues even if your preferred model is unavailable. Each agent has a provider priority chain. The system tries models in order until it finds an available one.
 
 ### Custom Model Configuration
 
@@ -168,94 +162,91 @@ You can override specific agents or categories in your config:
 
 ```jsonc
 {
-  "$schema": "https://raw.githubusercontent.com/code-yeongyu/oh-my-openagent/dev/assets/oh-my-openagent.schema.json",
+  "$schema": "https://opencode.ai/config.json",
 
   "agents": {
-    // Main orchestrator: Claude Opus or Kimi K2.5 work best
+    // Main orchestrator: Qwen3.5 Plus works best
     "sisyphus": {
-      "model": "kimi-for-coding/k2p5",
-      "ultrawork": { "model": "anthropic/claude-opus-4-6", "variant": "max" },
+      "model": "bailian-coding-plan/qwen3.5-plus",
+      "thinking": { "type": "enabled", "budgetTokens": 8192 },
     },
 
-    // Research agents: cheaper models are fine
-    "librarian": { "model": "google/gemini-3-flash" },
-    "explore": { "model": "github-copilot/grok-code-fast-1" },
+    // Deep researcher: GLM-5 for strong reasoning
+    "hephaestus": { "model": "bailian-coding-plan/glm-5" },
 
-    // Architecture consultation: GPT or Claude Opus
-    "oracle": { "model": "openai/gpt-5.4", "variant": "high" },
+    // Insight synthesis: Qwen3.5 Plus for max capability
+    "oracle": { "model": "bailian-coding-plan/qwen3.5-plus" },
   },
 
   "categories": {
-    // Frontend work: Gemini dominates visual tasks
-    "visual-engineering": {
-      "model": "google/gemini-3.1-pro",
-      "variant": "high",
+    // Visual analysis: Kimi K2.5 for multimodal
+    "visual-audit": {
+      "model": "bailian-coding-plan/kimi-k2.5",
     },
 
-    // General high-effort work
-    "unspecified-high": { "model": "anthropic/claude-opus-4-6", "variant": "max" },
+    // Deep reasoning: GLM-5
+    "thematic-analysis": { "model": "bailian-coding-plan/glm-5" },
 
-    // Quick tasks: use GPT-5.4-mini (fast and cheap)
-    "quick": { "model": "openai/gpt-5.4-mini" },
+    // Quick tasks: MiniMax M2.5 (fast and cheap)
+    "quick-lookup": { "model": "bailian-coding-plan/MiniMax-M2.5" },
 
-    // Deep reasoning: GPT-5.4
-    "ultrabrain": { "model": "openai/gpt-5.4", "variant": "xhigh" },
+    // Complex research: Qwen3.5 Plus
+    "comprehensive-study": { "model": "bailian-coding-plan/qwen3.5-plus" },
   },
 }
 ```
 
-### Model Families
+### Model Capabilities
 
-**Claude-like models** (instruction-following, structured output):
+**Qwen3.5 Plus** (most capable):
 
-- Claude Opus 4.6, Claude Sonnet 4.6, Claude Haiku 4.5
-- Kimi K2.5 — behaves very similarly to Claude
-- GLM 5 — Claude-like behavior, good for broad tasks
+- 1M context window, multimodal (text+image), thinking enabled
+- Best for: orchestration, synthesis, complex planning
 
-**GPT models** (explicit reasoning, principle-driven):
+**GLM-5 / GLM-4.7** (strong reasoning):
 
-- GPT-5.4 — deep coding powerhouse, required for Hephaestus and default for Oracle
-- GPT-5-Nano — ultra-cheap, fast utility tasks
+- 202K context, thinking enabled, "Agentic Engineering"
+- Best for: deep research, pattern detection, analysis
 
-**Different-behavior models**:
+**Kimi K2.5** (multimodal):
 
-- Gemini 3.1 Pro — excels at visual/frontend tasks
-- MiniMax M2.7 / M2.7-highspeed — fast and smart for utility tasks
-- Grok Code Fast 1 — optimized for code grep/search
+- 262K context, multimodal (text+image), thinking enabled, "Visual Agentic Intelligence"
+- Best for: visual analysis, heuristic evaluation, creative work
+
+**MiniMax M2.5** (fast):
+
+- 196K context, thinking enabled, "SOTA in Agent"
+- Best for: quick lookup tasks, fast processing
 
 See the [Agent-Model Matching Guide](./agent-model-matching.md) for complete details on which models work best for each agent, safe vs dangerous overrides, and provider priority chains.
 
 ---
 
-## Why It's Better Than Pure Claude Code
+## Why It's Better Than Single-Model Research
 
-Claude Code is good. But it's a single agent running a single model doing everything alone.
+Using a single AI agent for research is like having one researcher do everything alone.
 
-Oh My OpenAgent turns that into a coordinated team:
+Oh My OpenBusiness turns that into a coordinated team:
 
-**Parallel execution.** Claude Code processes one thing at a time. OmO fires background agents in parallel — research, implementation, and verification happening simultaneously. Like having 5 engineers instead of 1.
+**Parallel execution.** Single-model tools process one thing at a time. OmO fires background agents in parallel — social listening, review mining, and forum scanning happening simultaneously. Like having 5 researchers instead of 1.
 
-**Hash-anchored edits.** Claude Code's edit tool fails when the model can't reproduce lines exactly. OmO's `LINE#ID` content hashing validates every edit before applying. Grok Code Fast 1 went from 6.7% to 68.3% success rate just from this change.
+**Intent Gate.** Single-model tools take your prompt and run. OmO classifies your true research intent first — discovery, deep research, audit, competitive analysis — then routes accordingly. Fewer misinterpretations, better findings.
 
-**Intent Gate.** Claude Code takes your prompt and runs. OmO classifies your true intent first — research, implementation, investigation, fix — then routes accordingly. Fewer misinterpretations, better results.
+**Web extraction MCPs.** Reddit, X/Twitter, semantic-scholar, appstore-reviews, webpage-extractor, social-search. Each brings its own data source, scoped to the research task. Context window stays clean instead of bloating with every tool.
 
-**LSP + AST tools.** Workspace-level rename, go-to-definition, find-references, pre-build diagnostics, AST-aware code rewrites. IDE precision that vanilla Claude Code doesn't have.
+**Discipline enforcement.** Todo enforcer yanks idle agents back to work. Research memory tracks findings across sessions. The system doesn't let the agent slack off.
 
-**Skills with embedded MCPs.** Each skill brings its own MCP servers, scoped to the task. Context window stays clean instead of bloating with every tool.
-
-**Discipline enforcement.** Todo enforcer yanks idle agents back to work. Comment checker strips AI slop. Ralph Loop keeps going until 100% done. The system doesn't let the agent slack off.
-
-**The fundamental advantage.** Models have different temperaments. Claude thinks deeply. GPT reasons architecturally. Gemini visualizes. Haiku moves fast. Single-model tools force you to pick one personality for all tasks. Oh My OpenAgent leverages them all, routing by task type. This isn't a temporary hack — it's the only architecture that makes sense as models specialize further. The gap between multi-model orchestration and single-model limitation widens every month. We're betting on that future.
+**The fundamental advantage.** Models have different temperaments. Qwen3.5 Plus orchestrates deeply. GLM-5 reasons architecturally. Kimi K2.5 visualizes. MiniMax M2.5 moves fast. Single-model tools force you to pick one personality for all tasks. Oh My OpenBusiness leverages them all, routing by research task type. This isn't a temporary hack — it's the only architecture that makes sense as models specialize further. The gap between multi-model orchestration and single-model limitation widens every month. We're betting on that future.
 
 ---
 
 ## The Intent Gate
 
-Before acting on any request, Sisyphus classifies your true intent.
+Before acting on any request, Sisyphus classifies your true research intent.
 
-Are you asking for research? Implementation? Investigation? A fix? The Intent Gate figures out what you actually want, not just the literal words you typed. This means the agent understands context, nuance, and the real goal behind your request.
+Are you asking for discovery research? Deep analysis? Competitive audit? Synthesis? The Intent Gate figures out what you actually want, not just the literal words you typed. This means the agent understands context, nuance, and the real research goal behind your request.
 
-Claude Code doesn't have this. It takes your prompt and runs. Oh My OpenAgent thinks first, then acts.
+Single-model tools don't have this. They take your prompt and run. Oh My OpenBusiness thinks first, then researches.
 
 ---
 
@@ -270,4 +261,4 @@ Claude Code doesn't have this. It takes your prompt and runs. Oh My OpenAgent th
 
 ---
 
-**Ready to start?** Type `ultrawork` and see what a coordinated AI team can do.
+**Ready to start?** Type `/start-research checkout-abandonment` and see what a coordinated AI research team can do.

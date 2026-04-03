@@ -1,6 +1,6 @@
 # CLI Reference
 
-Complete reference for the published `oh-my-opencode` CLI. During the rename transition, OpenCode plugin registration now prefers `oh-my-openagent` inside `opencode.json`.
+Complete reference for the published `oh-my-opencode` CLI.
 
 ## Basic Usage
 
@@ -14,21 +14,21 @@ npx oh-my-opencode
 
 ## Commands
 
-| Command                       | Description                                            |
-| ----------------------------- | ------------------------------------------------------ |
-| `install`                     | Interactive setup wizard                               |
-| `doctor`                      | Environment diagnostics and health checks              |
-| `run`                         | OpenCode session runner with task completion enforcement |
-| `get-local-version`           | Display local version information and update check     |
-| `refresh-model-capabilities`  | Refresh the cached models.dev-based model capabilities |
-| `version`                     | Show version information                               |
-| `mcp oauth`                   | MCP OAuth authentication management                    |
+| Command | Description |
+|---------|-------------|
+| `install` | Interactive setup wizard |
+| `doctor` | Environment diagnostics and health checks |
+| `run` | OpenCode session runner with research completion enforcement |
+| `get-local-version` | Display local version information and update check |
+| `refresh-model-capabilities` | Refresh the cached model capabilities |
+| `version` | Show version information |
+| `mcp oauth` | MCP OAuth authentication management |
 
 ---
 
 ## install
 
-Interactive installation tool for initial Oh My OpenCode setup. Provides a TUI based on `@clack/prompts`.
+Interactive installation tool for initial Oh My OpenBusiness setup. Provides a TUI based on `@clack/prompts`.
 
 ### Usage
 
@@ -38,37 +38,30 @@ bunx oh-my-opencode install
 
 ### Installation Process
 
-1. **Subscription Selection**: Choose which providers and subscriptions you actually have
-2. **Plugin Registration**: Registers `oh-my-openagent` in OpenCode settings, or upgrades a legacy `oh-my-opencode` entry during the compatibility window
-3. **Configuration File Creation**: Writes the generated OmO config to `oh-my-opencode.json` in the active OpenCode config directory
-4. **Authentication Hints**: Shows the `opencode auth login` steps for the providers you selected, unless `--skip-auth` is set
+1. **Provider Selection**: Choose which providers you have (bailian-coding-plan)
+2. **Plugin Registration**: Registers `oh-my-openbusiness` in OpenCode settings
+3. **Configuration File Creation**: Writes the generated config to `oh-my-openbusiness.jsonc` in the active OpenCode config directory
+4. **Authentication Hints**: Shows the `opencode auth login` steps for the providers you selected
 
 ### Options
 
 | Option | Description |
-| ------ | ----------- |
+|--------|-------------|
 | `--no-tui` | Run in non-interactive mode without TUI |
-| `--claude <no\|yes\|max20>` | Claude subscription mode |
-| `--openai <no\|yes>` | OpenAI / ChatGPT subscription |
-| `--gemini <no\|yes>` | Gemini integration |
-| `--copilot <no\|yes>` | GitHub Copilot subscription |
-| `--opencode-zen <no\|yes>` | OpenCode Zen access |
-| `--zai-coding-plan <no\|yes>` | Z.ai Coding Plan subscription |
-| `--kimi-for-coding <no\|yes>` | Kimi for Coding subscription |
-| `--opencode-go <no\|yes>` | OpenCode Go subscription |
+| `--bailian <no|yes>` | bailian-coding-plan subscription |
 | `--skip-auth` | Skip authentication setup hints |
 
 ---
 
 ## doctor
 
-Diagnoses your environment to ensure Oh My OpenCode is functioning correctly. The current checks are grouped into system, config, tools, and models.
+Diagnoses your environment to ensure Oh My OpenBusiness is functioning correctly. The current checks are grouped into system, config, tools, and models.
 
 The doctor command detects common issues including:
-- Legacy plugin entry references in `opencode.json` (warns when `oh-my-opencode` is still used instead of `oh-my-openagent`)
 - Configuration file validity and JSONC parsing errors
 - Model resolution and fallback chain verification
 - Missing or misconfigured MCP servers
+
 ### Usage
 
 ```bash
@@ -77,28 +70,28 @@ bunx oh-my-opencode doctor
 
 ### Diagnostic Categories
 
-| Category          | Check Items                                                                          |
-| ----------------- | ------------------------------------------------------------------------------------ |
-| **System**        | OpenCode binary, version (>= 1.0.150), plugin registration, legacy package name warning |
-| **Config**        | Configuration file validity, JSONC parsing, Zod schema validation                    |
-| **Tools**         | AST-Grep, LSP servers, GitHub CLI, MCP servers                                       |
-| **Models**        | Model capabilities cache, model resolution, agent/category overrides, availability   |
+| Category | Check Items |
+|----------|-------------|
+| **System** | OpenCode binary, version (>= 1.0.150), plugin registration |
+| **Config** | Configuration file validity, JSONC parsing, Zod schema validation |
+| **Tools** | Web search MCPs, research MCPs, MCP servers |
+| **Models** | Model capabilities cache, model resolution, agent/category overrides, availability |
 
 ### Options
 
-| Option       | Description                               |
-| ------------ | ----------------------------------------- |
-| `--status`   | Show compact system dashboard             |
-| `--verbose`  | Show detailed diagnostic information      |
-| `--json`     | Output results in JSON format             |
+| Option | Description |
+|--------|-------------|
+| `--status` | Show compact system dashboard |
+| `--verbose` | Show detailed diagnostic information |
+| `--json` | Output results in JSON format |
 
 ### Example Output
 
 ```
-oh-my-opencode doctor
+oh-my-openbusiness doctor
 
 ┌──────────────────────────────────────────────────┐
-│  Oh-My-OpenAgent Doctor                           │
+│  Oh-My-OpenBusiness Doctor                        │
 └──────────────────────────────────────────────────┘
 
 System
@@ -106,13 +99,14 @@ System
   ✓ Plugin registered in opencode.json
 
 Config
-  ✓ oh-my-opencode.jsonc is valid
+  ✓ oh-my-openbusiness.jsonc is valid
   ✓ Model resolution: all agents have valid fallback chains
-  ⚠ categories.visual-engineering: using default model
+  ⚠ categories.visual-audit: using default model
 
 Tools
-  ✓ AST-Grep available
-  ✓ LSP servers configured
+  ✓ websearch MCP available
+  ✓ reddit MCP available
+  ✓ x-twitter MCP available
 
 Models
   ✓ 11 agents, 8 categories, 0 overrides
@@ -120,6 +114,7 @@ Models
 
 Summary: 10 passed, 1 warning, 0 failed
 ```
+
 ---
 
 ## run
@@ -134,18 +129,18 @@ bunx oh-my-opencode run <message>
 
 ### Options
 
-| Option                | Description                                                         |
-| --------------------- | ------------------------------------------------------------------- |
-| `-a, --agent <name>`  | Agent to use (default: from CLI/env/config, fallback: Sisyphus)     |
-| `-m, --model <provider/model>` | Model override (e.g., anthropic/claude-sonnet-4)             |
-| `-d, --directory <path>` | Working directory                                                |
-| `-p, --port <port>`  | Server port (attaches if port already in use)                       |
-| `--attach <url>`      | Attach to existing opencode server URL                              |
-| `--on-complete <command>` | Shell command to run after completion                          |
-| `--json`              | Output structured JSON result to stdout                             |
-| `--no-timestamp`      | Disable timestamp prefix in run output                              |
-| `--verbose`           | Show full event stream (default: messages/tools only)               |
-| `--session-id <id>`   | Resume existing session instead of creating new one                 |
+| Option | Description |
+|--------|-------------|
+| `-a, --agent <name>` | Agent to use (default: from CLI/env/config, fallback: Sisyphus) |
+| `-m, --model <provider/model>` | Model override (e.g., bailian-coding-plan/qwen3.5-plus) |
+| `-d, --directory <path>` | Working directory |
+| `-p, --port <port>` | Server port (attaches if port already in use) |
+| `--attach <url>` | Attach to existing opencode server URL |
+| `--on-complete <command>` | Shell command to run after completion |
+| `--json` | Output structured JSON result to stdout |
+| `--no-timestamp` | Disable timestamp prefix in run output |
+| `--verbose` | Show full event stream (default: messages/tools only) |
+| `--session-id <id>` | Resume existing session instead of creating new one |
 
 ---
 
@@ -161,10 +156,10 @@ bunx oh-my-opencode get-local-version
 
 ### Options
 
-| Option            | Description                                    |
-| ----------------- | ---------------------------------------------- |
-| `-d, --directory` | Working directory to check config from         |
-| `--json`          | Output in JSON format for scripting            |
+| Option | Description |
+|--------|-------------|
+| `-d, --directory` | Working directory to check config from |
+| `--json` | Output in JSON format for scripting |
 
 ### Output
 
@@ -212,11 +207,11 @@ bunx oh-my-opencode mcp oauth status [server-name]
 
 ### Options
 
-| Option               | Description                                                               |
-| -------------------- | ------------------------------------------------------------------------- |
-| `--server-url <url>` | MCP server URL (required for login)                                       |
-| `--client-id <id>`   | OAuth client ID (optional if server supports Dynamic Client Registration) |
-| `--scopes <scopes>`  | OAuth scopes as separate variadic arguments (for example: `--scopes read write`) |
+| Option | Description |
+|--------|-------------|
+| `--server-url <url>` | MCP server URL (required for login) |
+| `--client-id <id>` | OAuth client ID (optional if server supports Dynamic Client Registration) |
+| `--scopes <scopes>` | OAuth scopes as separate variadic arguments |
 
 ### Token Storage
 
@@ -228,10 +223,8 @@ Tokens are stored in `~/.config/opencode/mcp-oauth.json` with `0600` permissions
 
 The runtime loads user config as the base config, then merges project config on top:
 
-1. **Project Level**: `.opencode/oh-my-openagent.jsonc`, `.opencode/oh-my-openagent.json`, `.opencode/oh-my-opencode.jsonc`, or `.opencode/oh-my-opencode.json`
-2. **User Level**: `~/.config/opencode/oh-my-openagent.jsonc`, `~/.config/opencode/oh-my-openagent.json`, `~/.config/opencode/oh-my-opencode.jsonc`, or `~/.config/opencode/oh-my-opencode.json`
-
-**Naming Note**: The published package and binary are still `oh-my-opencode`. Inside `opencode.json`, the compatibility layer now prefers the plugin entry `oh-my-openagent`. Plugin config loading recognizes both `oh-my-openagent.*` and legacy `oh-my-opencode.*` basenames. If both basenames exist in the same directory, the legacy `oh-my-opencode.*` file currently wins.
+1. **Project Level**: `.opencode/oh-my-openbusiness.jsonc` or `.opencode/oh-my-openbusiness.json`
+2. **User Level**: `~/.config/opencode/oh-my-openbusiness.jsonc` or `~/.config/opencode/oh-my-openbusiness.json`
 
 ### Filename Compatibility
 
@@ -255,8 +248,8 @@ Configuration files support **JSONC (JSON with Comments)** format. You can use c
 
   /* Category customization */
   "categories": {
-    "visual-engineering": {
-      "model": "google/gemini-3.1-pro",
+    "visual-audit": {
+      "model": "bailian-coding-plan/kimi-k2.5",
     },
   },
 }
@@ -295,15 +288,6 @@ bunx oh-my-opencode doctor --status
 bunx oh-my-opencode doctor --json
 ```
 
-### "Using legacy package name" Warning
-
-The doctor warns if it finds the legacy plugin entry `oh-my-opencode` in `opencode.json`. Update the plugin array to the canonical `oh-my-openagent` entry:
-
-```bash
-# Replace the legacy plugin entry in user config
-jq '.plugin = (.plugin // [] | map(if . == "oh-my-opencode" then "oh-my-openagent" else . end))' \
-  ~/.config/opencode/opencode.json > /tmp/opencode.json && mv /tmp/opencode.json ~/.config/opencode/opencode.json
-```
 ---
 
 ## refresh-model-capabilities
@@ -318,11 +302,11 @@ bunx oh-my-opencode refresh-model-capabilities
 
 ### Options
 
-| Option            | Description                                         |
-| ----------------- | --------------------------------------------------- |
-| `-d, --directory` | Working directory to read oh-my-opencode config from |
-| `--source-url <url>` | Override the models.dev source URL               |
-| `--json`          | Output refresh summary as JSON                      |
+| Option | Description |
+|--------|-------------|
+| `-d, --directory` | Working directory to read config from |
+| `--source-url <url>` | Override the models.dev source URL |
+| `--json` | Output refresh summary as JSON |
 
 ### Configuration
 
@@ -367,7 +351,7 @@ src/cli/
 │   └── *.ts
 ├── doctor/               # Health check system
 │   ├── index.ts          # Doctor command entry
-│   └── checks/           # 17+ individual check modules
+│   └── checks/           # Individual check modules
 ├── run/                  # Session runner
 │   └── *.ts
 └── mcp-oauth/            # OAuth management commands
@@ -385,7 +369,6 @@ export const myCheck: DoctorCheck = {
   name: "my-check",
   category: "environment",
   check: async () => {
-    // Check logic
     const isOk = await someValidation();
 
     return {

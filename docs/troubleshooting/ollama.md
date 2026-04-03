@@ -4,13 +4,13 @@
 
 ### Problem
 
-When using Ollama as a provider with oh-my-openagent agents, you may encounter:
+When using Ollama as a provider with oh-my-openbusiness agents, you may encounter:
 
 ```
 JSON Parse error: Unexpected EOF
 ```
 
-This occurs when agents attempt tool calls (e.g., `explore` agent using `mcp_grep_search`).
+This occurs when agents attempt tool calls (e.g., `explore` agent using web search MCPs).
 
 ### Root Cause
 
@@ -21,12 +21,12 @@ Ollama returns **NDJSON** (newline-delimited JSON) when `stream: true` is used i
 {"message":{"content":""}, "done":true}
 ```
 
-Claude Code SDK expects a single JSON object, not multiple NDJSON lines, causing the parse error.
+OpenCode SDK expects a single JSON object, not multiple NDJSON lines, causing the parse error.
 
 **Why this happens:**
 - **Ollama API**: Returns streaming responses as NDJSON by design
-- **Claude Code SDK**: Doesn't properly handle NDJSON responses for tool calls
-- **oh-my-openagent**: Passes through the SDK's behavior (can't fix at this layer)
+- **OpenCode SDK**: Doesn't properly handle NDJSON responses for tool calls
+- **oh-my-openbusiness**: Passes through the SDK's behavior (can't fix at this layer)
 
 ## Solutions
 
@@ -60,14 +60,14 @@ If you need streaming, avoid agents that use tools:
 
 ### Option 3: Wait for SDK Fix
 
-The proper fix requires Claude Code SDK to:
+The proper fix requires OpenCode SDK to:
 
 1. Detect NDJSON responses
 2. Parse each line separately
 3. Merge `tool_calls` from multiple lines
 4. Return a single merged response
 
-**Tracking**: https://github.com/code-yeongyu/oh-my-openagent/issues/1124
+**Tracking**: https://github.com/iklemaat/oh-my-openbusiness/issues
 
 ## Workaround Implementation
 
@@ -114,7 +114,7 @@ curl -s http://localhost:11434/api/chat \
 
 ## Related Issues
 
-- **oh-my-openagent**: https://github.com/code-yeongyu/oh-my-openagent/issues/1124
+- **oh-my-openbusiness**: https://github.com/iklemaat/oh-my-openbusiness/issues
 - **Ollama API Docs**: https://github.com/ollama/ollama/blob/main/docs/api.md
 
 ## Getting Help

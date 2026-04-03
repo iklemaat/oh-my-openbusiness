@@ -1,88 +1,84 @@
 {
-  "$schema": "https://raw.githubusercontent.com/code-yeongyu/oh-my-opencode/dev/assets/oh-my-opencode.schema.json",
+  "$schema": "https://opencode.ai/config.json",
 
-  // Optimized for intensive coding sessions.
-  // Prioritizes deep implementation agents and fast feedback loops.
+  // Optimized for intensive UX research sessions.
+  // Prioritizes deep research agents and fast source scanning.
 
   "agents": {
     // Primary orchestrator: aggressive parallel delegation
     "sisyphus": {
-      "model": "kimi-for-coding/k2p5",
-      "ultrawork": { "model": "anthropic/claude-opus-4-6", "variant": "max" },
-      "prompt_append": "Delegate heavily to hephaestus for implementation. Parallelize exploration.",
+      "model": "bailian-coding-plan/qwen3.5-plus",
+      "thinking": { "type": "enabled", "budgetTokens": 8192 },
+      "prompt_append": "Delegate heavily to hephaestus for deep research. Parallelize source exploration.",
     },
 
-    // Heavy lifter: maximum autonomy for coding tasks
+    // Heavy lifter: maximum autonomy for research
     "hephaestus": {
-      "model": "openai/gpt-5.4",
-      "prompt_append": "You are the primary implementation agent. Own the codebase. Explore, decide, execute. Use LSP and AST-grep aggressively.",
-      "permission": { "edit": "allow", "bash": { "git": "allow", "test": "allow" } },
+      "model": "bailian-coding-plan/glm-5",
+      "thinking": { "type": "enabled", "budgetTokens": 8192 },
+      "prompt_append": "You are the primary research agent. Own the research. Explore sources, extract findings, synthesize. Use web search, social listening, and review mining aggressively.",
     },
 
-    // Lightweight planner: quick planning for coding tasks
+    // Research planner: thorough planning
     "prometheus": {
-      "model": "opencode/gpt-5-nano",
-      "prompt_append": "Keep plans concise. Focus on file structure and key decisions.",
+      "model": "bailian-coding-plan/qwen3.5-plus",
+      "thinking": { "type": "enabled", "budgetTokens": 8192 },
+      "prompt_append": "Keep plans thorough. Focus on source diversity, research waves, and evidence standards.",
     },
 
-    // Debugging and architecture
-    "oracle": { "model": "openai/gpt-5.4", "variant": "high" },
+    // Insight synthesis
+    "oracle": { "model": "bailian-coding-plan/qwen3.5-plus", "thinking": { "type": "enabled", "budgetTokens": 8192 } },
 
-    // Fast docs lookup
-    "librarian": { "model": "github-copilot/grok-code-fast-1" },
+    // Industry benchmarks
+    "librarian": { "model": "bailian-coding-plan/qwen3.5-plus" },
 
-    // Rapid codebase navigation
-    "explore": { "model": "github-copilot/grok-code-fast-1" },
+    // Web and social media scouting
+    "explore": { "model": "bailian-coding-plan/glm-5" },
 
-    // Frontend and visual work
-    "multimodal-looker": { "model": "google/gemini-3.1-pro" },
+    // Visual UX analysis
+    "multimodal-looker": { "model": "bailian-coding-plan/kimi-k2.5" },
 
-    // Plan review: minimal overhead
-    "metis": { "model": "opencode/gpt-5-nano" },
+    // Research optimization
+    "metis": { "model": "bailian-coding-plan/glm-5" },
 
-    // Code review focus
-    "momus": { "prompt_append": "Focus on code quality, edge cases, and test coverage." },
+    // Research plan review
+    "momus": { "model": "bailian-coding-plan/glm-4.7", "prompt_append": "Focus on research quality, evidence triangulation, and source diversity." },
 
-    // Long-running coding sessions
+    // Long-running research sessions
     "atlas": {},
 
-    // Quick fixes and small tasks
-    "sisyphus-junior": { "model": "opencode/gpt-5-nano" },
+    // Quick lookups and simple research
+    "sisyphus-junior": { "model": "bailian-coding-plan/MiniMax-M2.5" },
   },
 
   "categories": {
-    // Trivial changes: fastest possible
-    "quick": { "model": "opencode/gpt-5-nano" },
+    // Trivial lookups: fastest possible
+    "quick-lookup": { "model": "bailian-coding-plan/MiniMax-M2.5" },
 
-    // Standard coding tasks: good quality, fast
-    "unspecified-low": { "model": "anthropic/claude-sonnet-4-6" },
+    // Standard research: good quality, fast
+    "content-coding": { "model": "bailian-coding-plan/glm-5" },
 
-    // Complex refactors: best quality
-    "unspecified-high": { "model": "openai/gpt-5.3-codex" },
+    // Complex synthesis: best quality
+    "comprehensive-study": { "model": "bailian-coding-plan/qwen3.5-plus" },
 
     // Visual work
-    "visual-engineering": { "model": "google/gemini-3.1-pro", "variant": "high" },
+    "visual-audit": { "model": "bailian-coding-plan/kimi-k2.5", "thinking": { "type": "enabled", "budgetTokens": 8192 } },
 
-    // Deep autonomous work
-    "deep": { "model": "openai/gpt-5.4" },
+    // Deep autonomous research
+    "deep-research": { "model": "bailian-coding-plan/kimi-k2.5" },
 
-    // Architecture decisions
-    "ultrabrain": { "model": "openai/gpt-5.4", "variant": "xhigh" },
+    // Research decisions
+    "thematic-analysis": { "model": "bailian-coding-plan/glm-5" },
   },
 
-  // High concurrency for parallel agent work
+  // High concurrency for parallel research work
   "background_task": {
     "defaultConcurrency": 8,
     "providerConcurrency": {
-      "anthropic": 5,
-      "openai": 5,
-      "google": 10,
-      "github-copilot": 10,
-      "opencode": 15,
+      "bailian-coding-plan": 10,
     },
   },
 
-  // Enable all coding aids
-  "hashline_edit": true,
-  "experimental": { "aggressive_truncation": true, "task_system": true },
+  // Enable research aids
+  "experimental": { "task_system": true },
 }

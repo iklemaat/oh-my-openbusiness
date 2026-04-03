@@ -83,8 +83,7 @@ export async function executeSyncContinuation(
     }
 
     const allowTask = isPlanFamily(resumeAgent)
-    const tddEnabled = sisyphusAgentConfig?.tdd
-    const effectivePrompt = buildTaskPrompt(args.prompt, resumeAgent, tddEnabled)
+    const effectivePrompt = buildTaskPrompt(args.prompt, resumeAgent, false)
     const tools = {
       task: allowTask,
       call_omo_agent: true,

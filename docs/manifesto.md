@@ -1,6 +1,6 @@
 # Manifesto
 
-The principles and philosophy behind Oh My OpenAgent.
+The principles and philosophy behind Oh My OpenBusiness.
 
 ---
 
@@ -10,128 +10,128 @@ The principles and philosophy behind Oh My OpenAgent.
 
 Think about autonomous driving. When a human has to take over the wheel, that's not a feature. It's a failure of the system. The car couldn't handle the situation on its own.
 
-**Why is coding any different?**
+**Why is UX research any different?**
 
 When you find yourself:
-- Fixing the AI's half-finished code
-- Manually correcting obvious mistakes
-- Guiding the agent step-by-step through a task
-- Repeatedly clarifying the same requirements
+- Correcting the AI's shallow findings
+- Manually searching for sources the agent missed
+- Guiding the agent step-by-step through research
+- Repeatedly clarifying the same research requirements
 
 That's not "human-AI collaboration." That's the AI failing to do its job.
 
-**Oh My OpenAgent is built on this premise**: Human intervention during agentic work is fundamentally a wrong signal. If the system is designed correctly, the agent should complete the work without requiring you to babysit it.
+**Oh My OpenBusiness is built on this premise**: Human intervention during agentic research is fundamentally a wrong signal. If the system is designed correctly, the agent should complete the research without requiring you to babysit it.
 
 ---
 
-## Indistinguishable Code
+## Indistinguishable Research
 
-**Goal: Code written by the agent should be indistinguishable from code written by a senior engineer.**
+**Goal: Research produced by the agent should be indistinguishable from research conducted by a senior UX researcher.**
 
-Not "AI-generated code that needs cleanup." Not "a good starting point." The actual, final, production-ready code.
+Not "AI-generated findings that need cleanup." Not "a good starting point." The actual, final, publication-ready research deliverable.
 
 This means:
-- Following existing codebase patterns exactly
-- Proper error handling without being asked
-- Tests that actually test the right things
-- No AI slop (over-engineering, unnecessary abstractions, scope creep)
-- Comments only when they add value
+- Following established research methodologies exactly
+- Proper evidence triangulation without being asked
+- Findings that actually answer the research questions
+- No AI slop (over-generalization, unsupported claims, scope creep)
+- Citations and source attribution only when they add value
 
-If you can tell whether a commit was made by a human or an agent, the agent has failed.
+If you can tell whether a report was produced by a human or an agent, the agent has failed.
 
 ---
 
 ## Token Cost vs Productivity
 
-**Higher token usage is acceptable if it significantly increases productivity.**
+**Higher token usage is acceptable if it significantly increases research quality.**
 
 Using more tokens to:
-- Have multiple specialized agents research in parallel
+- Have multiple specialized agents research in parallel across different source types
 - Get the job done completely without human intervention
-- Verify work thoroughly before completion
-- Accumulate knowledge across tasks
+- Verify findings thoroughly through triangulation
+- Accumulate research wisdom across sessions
 
 That's a worthwhile investment when it means 10x, 20x, or 100x productivity gains.
 
 **However:**
 
 Unnecessary token waste is not pursued. The system optimizes for:
-- Using cheaper models (Haiku, Flash) for simple tasks
-- Avoiding redundant exploration
-- Caching learnings across sessions
-- Stopping research when sufficient context is gathered
+- Using cheaper models for simple lookup tasks
+- Avoiding redundant exploration across sources
+- Caching learnings across research sessions
+- Stopping research when sufficient evidence is gathered
 
-Token efficiency matters. But not at the cost of work quality or human cognitive load.
+Token efficiency matters. But not at the cost of research quality or human cognitive load.
 
 ---
 
 ## Minimize Human Cognitive Load
 
-**The human should only need to say what they want. Everything else is the agent's job.**
+**The human should only need to say what they want to know. Everything else is the agent's job.**
 
 Two approaches achieve this:
 
 ### Approach 1: Prometheus (Interview Mode)
 
-You say: "I want to add authentication."
+You say: "I want to understand why users abandon checkout."
 
 Prometheus:
-- Researches your codebase to understand existing patterns
+- Researches existing data to understand what's already known
 - Asks clarifying questions based on actual findings
 - Surfaces edge cases you hadn't considered
-- Documents decisions as you make them
-- Generates a complete work plan
+- Documents research decisions as you make them
+- Generates a complete research plan
 
 **You provide intent. The agent provides structure.**
 
 ### Approach 2: Ultrawork (Just Do It Mode)
 
-You say: "ulw add authentication"
+You say: "ulw research checkout abandonment"
 
 The agent:
-- Figures out the right approach
-- Researches best practices
-- Implements following conventions
-- Verifies everything works
-- Keeps going until complete
+- Figures out the right research approach
+- Researches best practices and methodologies
+- Executes following research conventions
+- Verifies all findings through triangulation
+- Keeps going until every question is answered
 
 **You provide intent. The agent handles everything.**
 
-In both cases, the human's job is to **express what they want**, not to manage how it gets done.
+In both cases, the human's job is to **express what they want to know**, not to manage how the research gets done.
 
 ---
 
 ## Predictable, Continuous, Delegatable
 
-**The ideal agent should work like a compiler**: markdown document goes in, working code comes out.
+**The ideal research agent should work like a research lab**: research question goes in, validated findings come out.
 
 ### Predictable
 
 Given the same inputs:
-- Same codebase patterns
-- Same requirements
-- Same constraints
+- Same research topic
+- Same source types
+- Same evidence standards
 
 The output should be consistent. Not random, not surprising, not "creative" in ways you didn't ask for.
 
 ### Continuous
 
-Work should survive interruptions:
-- Session crashes? Resume with `/start-work`
+Research should survive interruptions:
+- Session crashes? Resume with `/start-research`
 - Need to step away? Progress is tracked
-- Multi-day project? Context is preserved
+- Multi-week research project? Context is preserved
 
 The agent maintains state. You don't have to.
 
 ### Delegatable
 
-Just like you can assign a task to a capable team member and trust them to handle it, you should be able to delegate to the agent.
+Just like you can assign a research task to a capable team member and trust them to handle it, you should be able to delegate to the agent.
 
 This means:
-- Clear acceptance criteria, verified independently
-- Self-correcting behavior when something goes wrong
+- Clear research questions, answered independently
+- Self-correcting behavior when a source yields nothing
 - Escalation (to Oracle, to user) only when truly needed
-- Complete work, not "mostly done"
+- Complete research, not "mostly done"
 
 ---
 
@@ -144,18 +144,18 @@ Human Intent → Agent Execution → Verified Result
           (intervention only on true failure)
 ```
 
-Everything in Oh My OpenAgent is designed to make this loop work:
+Everything in Oh My OpenBusiness is designed to make this loop work:
 
 | Feature | Purpose |
 |---------|---------|
-| Prometheus | Extract intent through intelligent interview |
-| Metis | Catch ambiguities before they become bugs |
-| Momus | Verify plans are complete before execution |
-| Orchestrator | Coordinate work without human micromanagement |
+| Prometheus | Extract research intent through intelligent interview |
+| Metis | Catch ambiguities before they derail research |
+| Momus | Verify research plans are complete before execution |
+| Orchestrator | Coordinate research without human micromanagement |
 | Todo Continuation | Force completion, prevent "I'm done" lies |
 | Category System | Route to optimal model without human decision |
-| Background Agents | Parallel research without blocking user |
-| Wisdom Accumulation | Learn from work, don't repeat mistakes |
+| Background Agents | Parallel research across sources without blocking user |
+| Wisdom Accumulation | Learn from research, don't repeat mistakes |
 
 ---
 
@@ -163,11 +163,11 @@ Everything in Oh My OpenAgent is designed to make this loop work:
 
 **You should be able to:**
 
-1. Describe what you want (high-level or detailed, your choice)
+1. Describe what you want to know (high-level or detailed, your choice)
 2. Let the agent interview you if needed
-3. Confirm the plan (or just let ultrawork handle it)
+3. Confirm the research plan (or just let ultrawork handle it)
 4. Walk away
-5. Come back to completed, verified, production-ready work
+5. Come back to completed, verified, publication-ready research
 
 **If you can't do this, something in the system needs to improve.**
 
@@ -176,9 +176,9 @@ Everything in Oh My OpenAgent is designed to make this loop work:
 ## The Future We're Building
 
 A world where:
-- Human developers focus on **what** to build, not **how** to get AI to build it
-- Code quality is independent of who (or what) wrote it
-- Complex projects are as easy as simple ones (just take longer)
+- Human researchers focus on **what** to learn, not **how** to get AI to research it
+- Research quality is independent of who (or what) conducted it
+- Complex research projects are as easy as simple ones (just take longer)
 - "Prompt engineering" becomes as obsolete as "compiler debugging"
 
 **The agent should be invisible.** Not in the sense that it's hidden, but in the sense that it just works. Like electricity, like running water, like the internet.

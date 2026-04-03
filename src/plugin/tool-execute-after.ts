@@ -108,24 +108,16 @@ export function createToolExecuteAfterHandler(args: {
 
     const runToolExecuteAfterHooks = async (): Promise<void> => {
       await hooks.toolOutputTruncator?.["tool.execute.after"]?.(input, output)
-      await hooks.claudeCodeHooks?.["tool.execute.after"]?.(input, output)
       await hooks.preemptiveCompaction?.["tool.execute.after"]?.(input, output)
       await hooks.contextWindowMonitor?.["tool.execute.after"]?.(input, output)
-      await hooks.commentChecker?.["tool.execute.after"]?.(input, output)
       await hooks.directoryAgentsInjector?.["tool.execute.after"]?.(input, output)
       await hooks.directoryReadmeInjector?.["tool.execute.after"]?.(input, output)
-      await hooks.rulesInjector?.["tool.execute.after"]?.(input, output)
       await hooks.emptyTaskResponseDetector?.["tool.execute.after"]?.(input, output)
       await hooks.agentUsageReminder?.["tool.execute.after"]?.(input, output)
       await hooks.categorySkillReminder?.["tool.execute.after"]?.(input, output)
       await hooks.interactiveBashSession?.["tool.execute.after"]?.(input, output)
-      await hooks.editErrorRecovery?.["tool.execute.after"]?.(input, output)
       await hooks.delegateTaskRetry?.["tool.execute.after"]?.(input, output)
-      await hooks.atlasHook?.["tool.execute.after"]?.(input, output)
       await hooks.taskResumeInfo?.["tool.execute.after"]?.(input, output)
-      await hooks.readImageResizer?.["tool.execute.after"]?.(input, output)
-      await hooks.webfetchRedirectGuard?.["tool.execute.after"]?.(input, output)
-      await hooks.jsonErrorRecovery?.["tool.execute.after"]?.(input, output)
     }
 
     if (input.tool === "extract" || input.tool === "discard") {

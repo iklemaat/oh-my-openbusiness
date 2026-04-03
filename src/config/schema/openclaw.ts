@@ -1,46 +1,42 @@
 import { z } from "zod"
 
 export const OpenClawGatewaySchema = z.object({
-  type: z.enum(["http", "command"]).default("http"),
-  // HTTP specific
-  url: z.string().optional(),
-  method: z.string().default("POST"),
-  headers: z.record(z.string(), z.string()).optional(),
-  // Command specific
-  command: z.string().optional(),
-  // Shared
+  url: z.string(),
+  token: z.string().optional(),
+  type: z.string().optional(),
   timeout: z.number().optional(),
+  command: z.string().optional(),
+  headers: z.record(z.string(), z.string()).optional(),
+  method: z.string().optional(),
 })
 
 export const OpenClawHookSchema = z.object({
+  type: z.string(),
+  command: z.string(),
   enabled: z.boolean().default(true),
-  gateway: z.string(),
-  instruction: z.string(),
+  gateway: z.string().default(""),
+  instruction: z.string().optional(),
 })
 
 export const OpenClawReplyListenerConfigSchema = z.object({
+  enabled: z.boolean().default(false),
+  channel: z.string().optional(),
+  pollIntervalMs: z.number().optional(),
   discordBotToken: z.string().optional(),
   discordChannelId: z.string().optional(),
-  discordMention: z.string().optional(), // For allowed_mentions
-  authorizedDiscordUserIds: z.array(z.string()).default([]),
-
+  authorizedDiscordUserIds: z.array(z.string()).optional(),
   telegramBotToken: z.string().optional(),
   telegramChatId: z.string().optional(),
-
-  pollIntervalMs: z.number().default(3000),
-  rateLimitPerMinute: z.number().default(10),
-  maxMessageLength: z.number().default(500),
-  includePrefix: z.boolean().default(true),
+  rateLimitPerMinute: z.number().optional(),
+  includePrefix: z.boolean().optional(),
+  maxMessageLength: z.number().optional(),
 })
 
 export const OpenClawConfigSchema = z.object({
-  enabled: z.boolean().default(false),
-
-  // Outbound Configuration
-  gateways: z.record(z.string(), OpenClawGatewaySchema).default({}),
+  enabled: z.boolean().default(true),
+  gateway: OpenClawGatewaySchema.optional(),
+  gateways: z.array(OpenClawGatewaySchema).default([]),
   hooks: z.record(z.string(), OpenClawHookSchema).default({}),
-
-  // Inbound Configuration (Reply Listener)
   replyListener: OpenClawReplyListenerConfigSchema.optional(),
 })
 

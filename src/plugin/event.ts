@@ -241,7 +241,6 @@ export function createEventHandler(args: {
     await runEventHookSafely("preemptiveCompaction", hooks.preemptiveCompaction?.event, input);
     await runEventHookSafely("directoryAgentsInjector", hooks.directoryAgentsInjector?.event, input);
     await runEventHookSafely("directoryReadmeInjector", hooks.directoryReadmeInjector?.event, input);
-    await runEventHookSafely("rulesInjector", hooks.rulesInjector?.event, input);
     await runEventHookSafely("thinkMode", hooks.thinkMode?.event, input);
     await runEventHookSafely(
       "anthropicContextWindowLimitRecovery",

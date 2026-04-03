@@ -47,8 +47,7 @@ export async function sendSyncPrompt(
   deps: SendSyncPromptDeps = sendSyncPromptDeps
 ): Promise<string | null> {
   const allowTask = isPlanFamily(input.agentToUse)
-  const tddEnabled = input.sisyphusAgentConfig?.tdd
-  const effectivePrompt = buildTaskPrompt(input.args.prompt, input.agentToUse, tddEnabled)
+  const effectivePrompt = buildTaskPrompt(input.args.prompt, input.agentToUse, false)
   const tools = {
     task: allowTask,
     call_omo_agent: true,

@@ -80,11 +80,11 @@ export function resolveGateway(
   if (!config.enabled) return null
 
   const mapping = config.hooks[event]
-  if (!mapping || !mapping.enabled) {
+  if (!mapping || !mapping.enabled || !mapping.gateway) {
     return null
   }
 
-  const gateway = config.gateways[mapping.gateway]
+  const gateway = config.gateways[parseInt(mapping.gateway, 10)]
   if (!gateway) {
     return null
   }
@@ -97,7 +97,7 @@ export function resolveGateway(
     if (!gateway.url) return null
   }
 
-  return { gatewayName: mapping.gateway, gateway, instruction: mapping.instruction }
+  return { gatewayName: mapping.gateway, gateway, instruction: mapping.instruction ?? "" }
 }
 
 export function validateGatewayUrl(url: string): boolean {

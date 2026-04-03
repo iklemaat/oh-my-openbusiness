@@ -5224,11 +5224,17 @@
     "claude_code": {
       "type": "object",
       "properties": {
-        "mcp": {
-          "type": "boolean"
-        },
-        "commands": {
-          "type": "boolean"
+        "hooks": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "object",
+              "properties": {},
+              "additionalProperties": false
+            }
+          ]
         },
         "skills": {
           "type": "boolean"
@@ -5236,7 +5242,7 @@
         "agents": {
           "type": "boolean"
         },
-        "hooks": {
+        "commands": {
           "type": "boolean"
         },
         "plugins": {
@@ -5260,17 +5266,10 @@
         "disabled": {
           "type": "boolean"
         },
-        "default_builder_enabled": {
-          "type": "boolean"
-        },
         "planner_enabled": {
           "type": "boolean"
         },
         "replace_plan": {
-          "type": "boolean"
-        },
-        "tdd": {
-          "default": true,
           "type": "boolean"
         }
       },
@@ -5561,31 +5560,27 @@
       "type": "object",
       "properties": {
         "enabled": {
-          "default": false,
+          "default": true,
           "type": "boolean"
         },
         "default_max_iterations": {
           "default": 100,
-          "type": "number",
-          "minimum": 1,
-          "maximum": 1000
+          "type": "number"
         },
         "state_dir": {
           "type": "string"
         },
         "default_strategy": {
-          "default": "continue",
           "type": "string",
           "enum": [
-            "reset",
-            "continue"
+            "continue",
+            "reset"
           ]
         }
       },
       "required": [
         "enabled",
-        "default_max_iterations",
-        "default_strategy"
+        "default_max_iterations"
       ],
       "additionalProperties": false
     },
@@ -5745,31 +5740,64 @@
       "type": "object",
       "properties": {
         "enabled": {
-          "default": false,
+          "default": true,
           "type": "boolean"
         },
-        "gateways": {
-          "default": {},
+        "gateway": {
           "type": "object",
-          "propertyNames": {
-            "type": "string"
+          "properties": {
+            "url": {
+              "type": "string"
+            },
+            "token": {
+              "type": "string"
+            },
+            "type": {
+              "type": "string"
+            },
+            "timeout": {
+              "type": "number"
+            },
+            "command": {
+              "type": "string"
+            },
+            "headers": {
+              "type": "object",
+              "propertyNames": {
+                "type": "string"
+              },
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            "method": {
+              "type": "string"
+            }
           },
-          "additionalProperties": {
+          "required": [
+            "url"
+          ],
+          "additionalProperties": false
+        },
+        "gateways": {
+          "default": [],
+          "type": "array",
+          "items": {
             "type": "object",
             "properties": {
-              "type": {
-                "default": "http",
-                "type": "string",
-                "enum": [
-                  "http",
-                  "command"
-                ]
-              },
               "url": {
                 "type": "string"
               },
-              "method": {
-                "default": "POST",
+              "token": {
+                "type": "string"
+              },
+              "type": {
+                "type": "string"
+              },
+              "timeout": {
+                "type": "number"
+              },
+              "command": {
                 "type": "string"
               },
               "headers": {
@@ -5781,16 +5809,12 @@
                   "type": "string"
                 }
               },
-              "command": {
+              "method": {
                 "type": "string"
-              },
-              "timeout": {
-                "type": "number"
               }
             },
             "required": [
-              "type",
-              "method"
+              "url"
             ],
             "additionalProperties": false
           }
@@ -5804,11 +5828,18 @@
           "additionalProperties": {
             "type": "object",
             "properties": {
+              "type": {
+                "type": "string"
+              },
+              "command": {
+                "type": "string"
+              },
               "enabled": {
                 "default": true,
                 "type": "boolean"
               },
               "gateway": {
+                "default": "",
                 "type": "string"
               },
               "instruction": {
@@ -5816,9 +5847,10 @@
               }
             },
             "required": [
+              "type",
+              "command",
               "enabled",
-              "gateway",
-              "instruction"
+              "gateway"
             ],
             "additionalProperties": false
           }
@@ -5826,17 +5858,23 @@
         "replyListener": {
           "type": "object",
           "properties": {
+            "enabled": {
+              "default": false,
+              "type": "boolean"
+            },
+            "channel": {
+              "type": "string"
+            },
+            "pollIntervalMs": {
+              "type": "number"
+            },
             "discordBotToken": {
               "type": "string"
             },
             "discordChannelId": {
               "type": "string"
             },
-            "discordMention": {
-              "type": "string"
-            },
             "authorizedDiscordUserIds": {
-              "default": [],
               "type": "array",
               "items": {
                 "type": "string"
@@ -5848,29 +5886,18 @@
             "telegramChatId": {
               "type": "string"
             },
-            "pollIntervalMs": {
-              "default": 3000,
-              "type": "number"
-            },
             "rateLimitPerMinute": {
-              "default": 10,
-              "type": "number"
-            },
-            "maxMessageLength": {
-              "default": 500,
               "type": "number"
             },
             "includePrefix": {
-              "default": true,
               "type": "boolean"
+            },
+            "maxMessageLength": {
+              "type": "number"
             }
           },
           "required": [
-            "authorizedDiscordUserIds",
-            "pollIntervalMs",
-            "rateLimitPerMinute",
-            "maxMessageLength",
-            "includePrefix"
+            "enabled"
           ],
           "additionalProperties": false
         }
@@ -5897,29 +5924,22 @@
     },
     "git_master": {
       "default": {
-        "commit_footer": true,
-        "include_co_authored_by": true,
-        "git_env_prefix": "GIT_MASTER=1"
+        "commit_footer": false,
+        "include_co_authored_by": false,
+        "git_env_prefix": ""
       },
       "type": "object",
       "properties": {
         "commit_footer": {
-          "default": true,
-          "anyOf": [
-            {
-              "type": "boolean"
-            },
-            {
-              "type": "string"
-            }
-          ]
+          "default": false,
+          "type": "boolean"
         },
         "include_co_authored_by": {
-          "default": true,
+          "default": false,
           "type": "boolean"
         },
         "git_env_prefix": {
-          "default": "GIT_MASTER=1",
+          "default": "",
           "type": "string"
         }
       },
@@ -6043,7 +6063,7 @@
       "type": "object",
       "properties": {
         "auto_commit": {
-          "default": true,
+          "default": false,
           "type": "boolean"
         }
       },

@@ -25,8 +25,7 @@ export async function executeUnstableAgentTask(
   let launchedTaskID: string | undefined
 
   try {
-    const tddEnabled = sisyphusAgentConfig?.tdd
-    const effectivePrompt = buildTaskPrompt(args.prompt, agentToUse, tddEnabled)
+    const effectivePrompt = buildTaskPrompt(args.prompt, agentToUse, false)
     const task = await manager.launch({
       description: args.description,
       prompt: effectivePrompt,

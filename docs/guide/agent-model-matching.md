@@ -1,182 +1,185 @@
 # Agent-Model Matching Guide
 
-> **For agents and users**: Why each agent needs a specific model — and how to customize without breaking things.
+> **For agents and users**: Why each research agent needs a specific model — and how to customize without breaking things.
 
-## The Core Insight: Models Are Developers
+## The Core Insight: Models Think Differently
 
-Think of AI models as developers on a team. Each has a different brain, different personality, different strengths. **A model isn't just "smarter" or "dumber." It thinks differently.** Give the same instruction to Claude and GPT, and they'll interpret it in fundamentally different ways.
+Think of AI models as researchers on a team. Each has a different brain, different personality, different strengths. **A model isn't just "smarter" or "dumber." It thinks differently.** Give the same research instruction to qwen3.5-plus and glm-5, and they'll approach it in fundamentally different ways.
 
 This isn't a bug. It's the foundation of the entire system.
 
-Oh My OpenAgent assigns each agent a model that matches its _working style_ — like building a team where each person is in the role that fits their personality.
+Oh My OpenBusiness assigns each agent a model that matches its _working style_ — like building a research team where each person is in the role that fits their personality.
 
-### Sisyphus: The Sociable Lead
+### Sisyphus: The Research Director
 
-Sisyphus is the developer who knows everyone, goes everywhere, and gets things done through communication and coordination. Talks to other agents, understands context across the whole codebase, delegates work intelligently, and codes well too. But deep, purely technical problems? He'll struggle a bit.
+Sisyphus is the researcher who knows everyone, coordinates across disciplines, and gets research done through communication and delegation. Plans research waves, understands context across all source types, delegates work intelligently, and synthesizes findings well. But deep, purely autonomous exploration? That's better left to Hephaestus.
 
-**This is why Sisyphus uses Claude / Kimi / GLM.** These models excel at:
+**This is why Sisyphus uses qwen3.5-plus.** This model excels at:
 
 - Following complex, multi-step instructions (Sisyphus's prompt is ~1,100 lines)
 - Maintaining conversation flow across many tool calls
 - Understanding nuanced delegation and orchestration patterns
-- Producing well-structured, communicative output
+- 1M context window for full research scope awareness
+- Multimodal input for visual research elements
 
-Using Sisyphus with older GPT models would be like taking your best project manager — the one who coordinates everyone, runs standups, and keeps the whole team aligned — and sticking them in a room alone to debug a race condition. Wrong fit. GPT-5.4 now has a dedicated Sisyphus prompt path, but GPT is still not the default recommendation for the orchestrator.
+### Hephaestus: The Deep Researcher
 
-### Hephaestus: The Deep Specialist
+Hephaestus is the researcher who stays in their room exploring sources all day. Doesn't ask for permission. Might seem single-minded. But give them a research question and they'll emerge hours later with findings nobody else could have found.
 
-Hephaestus is the developer who stays in their room coding all day. Doesn't talk much. Might seem socially awkward. But give them a hard technical problem and they'll emerge three hours later with a solution nobody else could have found.
-
-**This is why Hephaestus uses GPT-5.4.** GPT-5.4 is built for exactly this:
+**This is why Hephaestus uses GLM-5.** GLM-5 is built for exactly this:
 
 - Deep, autonomous exploration without hand-holding
-- Multi-file reasoning across complex codebases
+- Strong reasoning across multiple source types
 - Principle-driven execution (give a goal, not a recipe)
 - Working independently for extended periods
-
-Using Hephaestus with GLM or Kimi would be like assigning your most communicative, sociable developer to sit alone and do nothing but deep technical work. They'd get it done eventually, but they wouldn't shine — you'd be wasting exactly the skills that make them valuable.
+- Thinking enabled for complex pattern detection
 
 ### The Takeaway
 
-Every agent's prompt is tuned to match its model's personality. **When you change the model, you change the brain — and the same instructions get understood completely differently.** Model matching isn't about "better" or "worse." It's about fit.
+Every agent's prompt is tuned to match its model's capabilities. **When you change the model, you change the brain — and the same instructions get understood completely differently.** Model matching isn't about "better" or "worse." It's about fit.
 
 ---
 
-## How Claude and GPT Think Differently
+## How Models Think Differently
 
-This matters for understanding why some agents support both model families while others don't.
+This matters for understanding why some agents support multiple model families while others don't.
 
-**Claude** responds to **mechanics-driven** prompts — detailed checklists, templates, step-by-step procedures. More rules = more compliance. You can write a 1,100-line prompt with nested workflows and Claude will follow every step.
+**qwen3.5-plus** responds to **mechanics-driven** prompts — detailed checklists, templates, step-by-step procedures. More rules = more compliance. You can write a 1,100-line prompt with nested workflows and qwen3.5-plus will follow every step.
 
-**GPT** (especially 5.2+) responds to **principle-driven** prompts — concise principles, XML structure, explicit decision criteria. More rules = more contradiction surface = more drift. GPT works best when you state the goal and let it figure out the mechanics.
+**GLM-5** responds to **principle-driven** prompts — concise principles, structured format, explicit decision criteria. GLM-5 works best when you state the research goal and let it figure out the mechanics.
 
-Real example: Prometheus's Claude prompt is ~1,100 lines across 7 files. The GPT prompt achieves the same behavior with 3 principles in ~121 lines. Same outcome, completely different approach.
-
-Agents that support both families (Prometheus, Atlas) auto-detect your model at runtime and switch prompts via `isGptModel()`. You don't have to think about it.
+Agents that support both families (Prometheus, Atlas) auto-detect your model at runtime and switch prompts accordingly. You don't have to think about it.
 
 ---
 
 ## Agent Profiles
 
-### Communicators → Claude / Kimi / GLM
+### Communicators → qwen3.5-plus / kimi-k2.5 / glm-5
 
-These agents have Claude-optimized prompts — long, detailed, mechanics-driven. They need models that reliably follow complex, multi-layered instructions.
+These agents have prompts tuned for models that reliably follow complex, multi-layered instructions.
 
-| Agent        | Role              | Fallback Chain                         | Notes                                                                                             |
-| ------------ | ----------------- | -------------------------------------- | ------------------------------------------------------------------------------------------------- |
-| **Sisyphus** | Main orchestrator | anthropic\|github-copilot\|opencode/claude-opus-4-6 (max) → opencode-go/kimi-k2.5 → kimi-for-coding/k2p5 → opencode\|moonshotai\|moonshotai-cn\|firmware\|ollama-cloud\|aihubmix/kimi-k2.5 → openai\|github-copilot\|opencode/gpt-5.4 (medium) → zai-coding-plan\|opencode/glm-5 → opencode/big-pickle | Exact runtime chain from `src/shared/model-requirements.ts`. |
-| **Metis**    | Plan gap analyzer | anthropic\|github-copilot\|opencode/claude-opus-4-6 (max) → openai\|github-copilot\|opencode/gpt-5.4 (high) → opencode-go/glm-5 → kimi-for-coding/k2p5 | Exact runtime chain from `src/shared/model-requirements.ts`. |
+| Agent | Role | Model | Notes |
+|-------|------|-------|-------|
+| **Sisyphus** | Research Director | qwen3.5-plus | 1M context, multimodal, thinking. Best for orchestration. |
+| **Metis** | Research Consultant | glm-5 | Strong reasoning for gap analysis and optimization. |
 
-### Dual-Prompt Agents → Claude preferred, GPT supported
+### Dual-Prompt Agents → qwen3.5-plus preferred, glm-5 supported
 
-These agents ship separate prompts for Claude and GPT families. They auto-detect your model and switch at runtime.
+These agents ship separate prompts for different model families. They auto-detect your model and switch at runtime.
 
-| Agent          | Role              | Fallback Chain                         | Notes                                                                |
-| -------------- | ----------------- | -------------------------------------- | -------------------------------------------------------------------- |
-| **Prometheus** | Strategic planner | anthropic\|github-copilot\|opencode/claude-opus-4-6 (max) → openai\|github-copilot\|opencode/gpt-5.4 (high) → opencode-go/glm-5 → google\|github-copilot\|opencode/gemini-3.1-pro | Exact runtime chain from `src/shared/model-requirements.ts`. |
-| **Atlas**      | Todo orchestrator | anthropic\|github-copilot\|opencode/claude-sonnet-4-6 → opencode-go/kimi-k2.5 → openai\|github-copilot\|opencode/gpt-5.4 (medium) → opencode-go/minimax-m2.7 | Exact runtime chain from `src/shared/model-requirements.ts`. |
+| Agent | Role | Model | Notes |
+|-------|------|-------|-------|
+| **Prometheus** | Research Planner | qwen3.5-plus | 1M context for complex planning. Auto-switches for glm-5. |
+| **Atlas** | Master Orchestrator | qwen3.5-plus | Full context coordination. Auto-switches for glm-5. |
 
-### Deep Specialists → GPT
+### Deep Specialists → glm-5
 
-These agents are built for GPT's principle-driven style. Their prompts assume autonomous, goal-oriented execution. Don't override to Claude.
+These agents are built for GLM's reasoning style. Their prompts assume autonomous, goal-oriented execution.
 
-| Agent          | Role                    | Fallback Chain                         | Notes                                            |
-| -------------- | ----------------------- | -------------------------------------- | ------------------------------------------------ |
-| **Hephaestus** | Autonomous deep worker  | GPT-5.4 (medium) | Requires a GPT-capable provider. The craftsman. |
-| **Oracle**     | Architecture consultant | openai\|github-copilot\|opencode/gpt-5.4 (high) → google\|github-copilot\|opencode/gemini-3.1-pro (high) → anthropic\|github-copilot\|opencode/claude-opus-4-6 (max) → opencode-go/glm-5 | Exact runtime chain from `src/shared/model-requirements.ts`. |
-| **Momus**      | Ruthless reviewer       | openai\|github-copilot\|opencode/gpt-5.4 (xhigh) → anthropic\|github-copilot\|opencode/claude-opus-4-6 (max) → google\|github-copilot\|opencode/gemini-3.1-pro (high) → opencode-go/glm-5 | Exact runtime chain from `src/shared/model-requirements.ts`. |
+| Agent | Role | Model | Notes |
+|-------|------|-------|-------|
+| **Hephaestus** | Deep Researcher | glm-5 | Autonomous research. Thinking enabled. The craftsman. |
+| **Oracle** | Insight Analyst | qwen3.5-plus | Complex synthesis. 1M context for large finding sets. |
+| **Momus** | Plan Reviewer | glm-4.7 | Strong reasoning for quality review. Thinking enabled. |
 
 ### Utility Runners → Speed over Intelligence
 
-These agents do grep, search, and retrieval. They intentionally use the fastest, cheapest models available. **Don't "upgrade" them to Opus** — that's hiring a senior engineer to file paperwork.
+These agents do web searching, social listening, and retrieval. They intentionally use the fastest, most efficient models available. **Don't "upgrade" them to qwen3.5-plus** — that's hiring your lead researcher to file paperwork.
 
-| Agent                 | Role               | Fallback Chain                                 | Notes                                                 |
-| --------------------- | ------------------ | ---------------------------------------------- | ----------------------------------------------------- |
-| **Explore**           | Fast codebase grep | github-copilot\|xai/grok-code-fast-1 → opencode-go/minimax-m2.7-highspeed → opencode/minimax-m2.7 → anthropic\|opencode/claude-haiku-4-5 → opencode/gpt-5-nano | Exact runtime chain from `src/shared/model-requirements.ts`. |
-| **Librarian**         | Docs/code search   | opencode-go/minimax-m2.7 → opencode/minimax-m2.7-highspeed → anthropic\|opencode/claude-haiku-4-5 → opencode/gpt-5-nano | Exact runtime chain from `src/shared/model-requirements.ts`. |
-| **Multimodal Looker** | Vision/screenshots | openai\|opencode/gpt-5.4 (medium) → opencode-go/kimi-k2.5 → zai-coding-plan/glm-4.6v → openai\|github-copilot\|opencode/gpt-5-nano | Exact runtime chain from `src/shared/model-requirements.ts`. |
-| **Sisyphus-Junior**   | Category executor  | anthropic\|github-copilot\|opencode/claude-sonnet-4-6 → opencode-go/kimi-k2.5 → openai\|github-copilot\|opencode/gpt-5.4 (medium) → opencode-go/minimax-m2.7 → opencode/big-pickle | Exact runtime chain from `src/shared/model-requirements.ts`. |
-
----
-
-## Model Families
-
-### Claude Family
-
-Communicative, instruction-following, structured output. Best for agents that need to follow complex multi-step prompts.
-
-| Model                 | Strengths                                                                    |
-| --------------------- | ---------------------------------------------------------------------------- |
-| **Claude Opus 4.6**   | Best overall. Highest compliance with complex prompts. Default for Sisyphus. |
-| **Claude Sonnet 4.6** | Faster, cheaper. Good balance for everyday tasks.                            |
-| **Claude Haiku 4.5**  | Fast and cheap. Good for quick tasks and utility work.                       |
-| **Kimi K2.5**         | Behaves very similarly to Claude. Great all-rounder at lower cost.           |
-| **GLM 5**             | Claude-like behavior. Solid for orchestration tasks.                         |
-
-### GPT Family
-
-Principle-driven, explicit reasoning, deep technical capability. Best for agents that work autonomously on complex problems.
-
-| Model             | Strengths                                                                                       |
-| ----------------- | ----------------------------------------------------------------------------------------------- |
-| **GPT-5.3 Codex** | Deep coding powerhouse. Autonomous exploration. Still available for deep category and explicit overrides. |
-| **GPT-5.4**       | High intelligence, strategic reasoning. Default for Oracle, Momus, and a key fallback for Prometheus / Atlas. Uses xhigh variant for Momus. |
-| **GPT-5.4 Mini**  | Fast + strong reasoning. Good for lightweight autonomous tasks. Default for quick category. |
-| **GPT-5-Nano**    | Ultra-cheap, fast. Good for simple utility tasks.                                               |
-
-### Other Models
-
-| Model                | Strengths                                                                                                    |
-| -------------------- | ------------------------------------------------------------------------------------------------------------ |
-| **Gemini 3.1 Pro**   | Excels at visual/frontend tasks. Different reasoning style. Default for `visual-engineering` and `artistry`. |
-| **Gemini 3 Flash**   | Fast. Good for doc search and light tasks.                                                                   |
-| **Grok Code Fast 1** | Blazing fast code grep. Default for Explore agent.                                                           |
-| **MiniMax M2.7**     | Fast and smart. Used in OpenCode Go and OpenCode Zen utility fallback chains. |
-| **MiniMax M2.7 Highspeed** | High-speed OpenCode catalog entry used in utility fallback chains that prefer the fastest available MiniMax path. |
-
-### OpenCode Go
-
-A premium subscription tier ($10/month) that provides reliable access to Chinese frontier models through OpenCode's infrastructure.
-
-**Available Models:**
-
-| Model                    | Use Case                                                              |
-| ------------------------ | --------------------------------------------------------------------- |
-| **opencode-go/kimi-k2.5** | Vision-capable, Claude-like reasoning. Used by Sisyphus, Atlas, Sisyphus-Junior, Multimodal Looker. |
-| **opencode-go/glm-5**     | Text-only orchestration model. Used by Oracle, Prometheus, Metis, Momus.                           |
-| **opencode-go/minimax-m2.7** | Ultra-cheap, fast responses. Used by Librarian, Atlas, and Sisyphus-Junior for utility work. |
-| **opencode-go/minimax-m2.7-highspeed** | Even faster OpenCode Go MiniMax entry used by Explore when the high-speed catalog entry is available. |
-
-**When It Gets Used:**
-
-OpenCode Go models appear throughout the fallback chains as intermediate options. Depending on the agent, they can sit before GPT, after GPT, or act as the last structured-model fallback before cheaper utility paths.
-
-**Go-Only Scenarios:**
-
-Some model identifiers like `k2p5` (paid Kimi K2.5) and `glm-5` may only be available through OpenCode Go subscription in certain regions. When configured with these short identifiers, the system resolves them through the opencode-go provider first.
-
-### About Free-Tier Fallbacks
-
-You may see model names like `kimi-k2.5-free`, `minimax-m2.7`, `minimax-m2.7-highspeed`, or `big-pickle` (GLM 4.6) in the source code or logs. These are provider-specific or speed-optimized entries in fallback chains.
-
-You don't need to configure them. The system includes them so it degrades gracefully when you don't have every paid subscription. If you have the paid version, the paid version is always preferred.
+| Agent | Role | Model | Notes |
+|-------|------|-------|-------|
+| **Explore** | Web Scout | glm-5 | Strong reasoning for pattern detection in user feedback. |
+| **Librarian** | Industry Researcher | qwen3.5-plus | 1M context for large documents and reports. |
+| **Multimodal Looker** | Visual Analyst | kimi-k2.5 | Multimodal (text+image) for visual UX analysis. |
+| **Sisyphus-Junior** | Research Assistant | MiniMax-M2.5 | Fast for simple research tasks. |
 
 ---
 
-## Task Categories
+## Model Capabilities
+
+### qwen3.5-plus (Most Capable)
+
+1M context window, multimodal (text+image), thinking enabled. Best for orchestration, synthesis, complex planning.
+
+| Capability | Detail |
+|------------|--------|
+| **Context** | 1,000,000 tokens — largest in the system |
+| **Multimodal** | Accepts text and image input |
+| **Thinking** | Enabled with 8,192 token budget |
+| **Output** | Up to 65,536 tokens |
+| **Best For** | Sisyphus, Atlas, Prometheus, Oracle, Librarian |
+
+### GLM-5 / GLM-4.7 (Strong Reasoning)
+
+202K context, thinking enabled, "Agentic Engineering" — designed for autonomous task execution.
+
+| Capability | Detail |
+|------------|--------|
+| **Context** | 202,752 tokens |
+| **Thinking** | Enabled with 8,192 token budget |
+| **Output** | Up to 16,384 tokens |
+| **Best For** | Hephaestus, Metis, Explore, Momus |
+
+### Kimi K2.5 (Multimodal)
+
+262K context, multimodal (text+image), thinking enabled, "Visual Agentic Intelligence."
+
+| Capability | Detail |
+|------------|--------|
+| **Context** | 262,144 tokens |
+| **Multimodal** | Accepts text and image input |
+| **Thinking** | Enabled with 8,192 token budget |
+| **Output** | Up to 32,768 tokens |
+| **Best For** | Multimodal-Looker, visual-audit category, artistry category |
+
+### MiniMax M2.5 (Fast)
+
+196K context, thinking enabled, "SOTA in Agent" — designed for agent tasks with speed.
+
+| Capability | Detail |
+|------------|--------|
+| **Context** | 196,608 tokens |
+| **Thinking** | Enabled with 8,192 token budget |
+| **Output** | Up to 24,576 tokens |
+| **Best For** | Sisyphus-Junior, quick-lookup category |
+
+### qwen3-max-2026-01-23 (General Reasoning)
+
+262K context, no thinking, no multimodal. Strong general-purpose reasoning.
+
+| Capability | Detail |
+|------------|--------|
+| **Context** | 262,144 tokens |
+| **Thinking** | Not available |
+| **Output** | Up to 32,768 tokens |
+| **Best For** | Writing category, general reasoning |
+
+### qwen3-coder-next / qwen3-coder-plus (Large Context)
+
+262K / 1M context. Optimized for code but usable for large document processing.
+
+| Capability | Detail |
+|------------|--------|
+| **Context** | 262,144 (next) / 1,000,000 (plus) |
+| **Thinking** | Not available |
+| **Best For** | Large document processing, utility tasks |
+
+---
+
+## Research Categories
 
 When agents delegate work, they don't pick a model name — they pick a **category**. The category maps to the right model automatically.
 
-| Category             | When Used                  | Fallback Chain                               |
-| -------------------- | -------------------------- | -------------------------------------------- |
-| `visual-engineering` | Frontend, UI, CSS, design  | google\|github-copilot\|opencode/gemini-3.1-pro (high) → zai-coding-plan\|opencode/glm-5 → anthropic\|github-copilot\|opencode/claude-opus-4-6 (max) → opencode-go/glm-5 → kimi-for-coding/k2p5 |
-| `ultrabrain`         | Maximum reasoning needed   | openai\|opencode/gpt-5.4 (xhigh) → google\|github-copilot\|opencode/gemini-3.1-pro (high) → anthropic\|github-copilot\|opencode/claude-opus-4-6 (max) → opencode-go/glm-5 |
-| `deep`               | Deep coding, complex logic | openai\|github-copilot\|venice\|opencode/gpt-5.4 (medium) → anthropic\|github-copilot\|opencode/claude-opus-4-6 (max) → google\|github-copilot\|opencode/gemini-3.1-pro (high) |
-| `artistry`           | Creative, novel approaches | google\|github-copilot\|opencode/gemini-3.1-pro (high) → anthropic\|github-copilot\|opencode/claude-opus-4-6 (max) → openai\|github-copilot\|opencode/gpt-5.4 |
-| `quick`              | Simple, fast tasks         | openai\|github-copilot\|opencode/gpt-5.4-mini → anthropic\|github-copilot\|opencode/claude-haiku-4-5 → google\|github-copilot\|opencode/gemini-3-flash → opencode-go/minimax-m2.7 → opencode/gpt-5-nano |
-| `unspecified-high`   | General complex work       | anthropic\|github-copilot\|opencode/claude-opus-4-6 (max) → openai\|github-copilot\|opencode/gpt-5.4 (high) → zai-coding-plan\|opencode/glm-5 → kimi-for-coding/k2p5 → opencode-go/glm-5 → opencode/kimi-k2.5 → opencode\|moonshotai\|moonshotai-cn\|firmware\|ollama-cloud\|aihubmix/kimi-k2.5 |
-| `unspecified-low`    | General standard work      | anthropic\|github-copilot\|opencode/claude-sonnet-4-6 → openai\|opencode/gpt-5.3-codex (medium) → opencode-go/kimi-k2.5 → google\|github-copilot\|opencode/gemini-3-flash → opencode-go/minimax-m2.7 |
-| `writing`            | Text, docs, prose          | google\|github-copilot\|opencode/gemini-3-flash → opencode-go/kimi-k2.5 → anthropic\|github-copilot\|opencode/claude-sonnet-4-6 → opencode-go/minimax-m2.7 |
+| Category | Model | When Used |
+|----------|-------|-----------|
+| `visual-audit` | kimi-k2.5 | Heuristic evaluation, visual analysis, accessibility |
+| `thematic-analysis` | glm-5 | Pattern identification, qualitative coding |
+| `deep-research` | kimi-k2.5 | In-depth investigation, thorough exploration |
+| `creative-insights` | qwen3.5-plus | Creative analysis, ideation, novel connections |
+| `quick-lookup` | MiniMax-M2.5 | Fast fact-finding, single-source queries |
+| `content-coding` | glm-5 | Qualitative data coding, sentiment classification |
+| `report-writing` | kimi-k2.5 | Research report generation, documentation |
+| `comprehensive-study` | qwen3.5-plus | Full research studies, multi-source synthesis |
 
 See the [Orchestration System Guide](./orchestration.md) for how agents dispatch tasks to categories.
 
@@ -188,85 +191,73 @@ See the [Orchestration System Guide](./orchestration.md) for how agents dispatch
 
 ```jsonc
 {
-  "$schema": "https://raw.githubusercontent.com/code-yeongyu/oh-my-openagent/dev/assets/oh-my-opencode.schema.json",
+  "$schema": "https://opencode.ai/config.json",
 
   "agents": {
-    // Main orchestrator: Claude Opus or Kimi K2.5 work best
+    // Main orchestrator: Qwen3.5 Plus works best
     "sisyphus": {
-      "model": "kimi-for-coding/k2p5",
-      "ultrawork": { "model": "anthropic/claude-opus-4-6", "variant": "max" },
+      "model": "bailian-coding-plan/qwen3.5-plus",
+      "thinking": { "type": "enabled", "budgetTokens": 8192 },
     },
 
-    // Research agents: cheaper models are fine
-    "librarian": { "model": "google/gemini-3-flash" },
-    "explore": { "model": "github-copilot/grok-code-fast-1" },
+    // Deep researcher: GLM-5 for strong reasoning
+    "hephaestus": { "model": "bailian-coding-plan/glm-5" },
 
-    // Architecture consultation: GPT or Claude Opus
-    "oracle": { "model": "openai/gpt-5.4", "variant": "high" },
+    // Insight synthesis: Qwen3.5 Plus for max capability
+    "oracle": { "model": "bailian-coding-plan/qwen3.5-plus" },
 
-    // Prometheus inherits sisyphus model; just add prompt guidance
+    // Research planner: Qwen3.5 Plus for complex planning
     "prometheus": {
+      "model": "bailian-coding-plan/qwen3.5-plus",
       "prompt_append": "Leverage deep & quick agents heavily, always in parallel.",
     },
   },
 
   "categories": {
-    "quick": { "model": "opencode/gpt-5-nano" },
-    "unspecified-low": { "model": "anthropic/claude-sonnet-4-6" },
-    "unspecified-high": { "model": "anthropic/claude-opus-4-6", "variant": "max" },
-    "visual-engineering": {
-      "model": "google/gemini-3.1-pro",
-      "variant": "high",
-    },
-    "writing": { "model": "google/gemini-3-flash" },
+    // Visual analysis: Kimi K2.5 for multimodal
+    "visual-audit": { "model": "bailian-coding-plan/kimi-k2.5" },
+
+    // Deep reasoning: GLM-5
+    "thematic-analysis": { "model": "bailian-coding-plan/glm-5" },
+
+    // Quick tasks: MiniMax M2.5 (fast and cheap)
+    "quick-lookup": { "model": "bailian-coding-plan/MiniMax-M2.5" },
+
+    // Complex research: Qwen3.5 Plus
+    "comprehensive-study": { "model": "bailian-coding-plan/qwen3.5-plus" },
   },
 
-  // Limit expensive providers; let cheap ones run freely
+  // Limit expensive models; let cheap ones run freely
   "background_task": {
     "providerConcurrency": {
-      "anthropic": 3,
-      "openai": 3,
-      "opencode": 10,
-      "zai-coding-plan": 10,
+      "bailian-coding-plan": 5,
     },
     "modelConcurrency": {
-      "anthropic/claude-opus-4-6": 2,
-      "opencode/gpt-5-nano": 20,
+      "bailian-coding-plan/qwen3.5-plus": 2,
+      "bailian-coding-plan/MiniMax-M2.5": 10,
     },
   },
 }
 ```
 
-Run `opencode models` to see available models, `opencode auth login` to authenticate providers.
-
 ### Safe vs Dangerous Overrides
 
-**Safe** — same personality type:
+**Safe** — similar capabilities:
 
-- Sisyphus: Opus → Sonnet, Kimi K2.5, GLM 5 (all communicative models)
-- Prometheus: Opus → GPT-5.4 (auto-switches to the GPT prompt)
-- Atlas: Claude Sonnet 4.6 → GPT-5.4 (auto-switches to the GPT prompt)
+- Sisyphus: qwen3.5-plus → glm-5 (both strong reasoning)
+- Prometheus: qwen3.5-plus → glm-5 (both support thinking)
+- Atlas: qwen3.5-plus → glm-5 (both strong reasoning)
 
-**Dangerous** — personality mismatch:
+**Dangerous** — capability mismatch:
 
-- Sisyphus → older GPT models: **Still a bad fit. GPT-5.4 is the only dedicated GPT prompt path.**
-- Hephaestus → Claude: **Built for Codex's autonomous style. Claude can't replicate this.**
-- Explore → Opus: **Massive cost waste. Explore needs speed, not intelligence.**
-- Librarian → Opus: **Same. Doc search doesn't need Opus-level reasoning.**
+- Sisyphus → MiniMax-M2.5: **Too weak for orchestration. Sisyphus needs the most capable model.**
+- Hephaestus → qwen3-coder-next: **Coder models aren't optimized for research reasoning.**
+- Explore → qwen3.5-plus: **Cost waste. Explore needs reasoning, not max capability.**
+- Librarian → MiniMax-M2.5: **Librarian needs 1M context for large documents.**
 
 ### How Model Resolution Works
 
-Each agent has a fallback chain. The system tries models in priority order until it finds one available through your connected providers. You don't need to configure providers per model. Just authenticate (`opencode auth login`) and the system figures out which models are available and where.
-
-Core-agent tab cycling is deterministic via injected runtime order field. The fixed priority order is Sisyphus (order: 1), Hephaestus (order: 2), Prometheus (order: 3), and Atlas (order: 4), then the remaining agents follow.
-
-Your explicit configuration always wins. If you set a specific model for an agent, that choice takes precedence even when resolution data is cold.
-
-Variant and `reasoningEffort` overrides are normalized to model-supported values, so cross-provider overrides degrade gracefully instead of failing hard.
-
-Model capabilities are models.dev-backed, with a refreshable cache and capability diagnostics. Use `bunx oh-my-opencode refresh-model-capabilities` to update the cache, or configure `model_capabilities.auto_refresh_on_start` to refresh at startup.
-
-To see which models your agents will actually use, run `bunx oh-my-opencode doctor`. This shows effective model resolution based on your current authentication and config.
+Each agent has a fallback chain. The system tries models in priority order until it finds one available. You don't need to configure providers per model. Just set your API key and the system figures out which models are available.
 
 ```
 Agent Request → User Override (if configured) → Fallback Chain → System Default
@@ -274,21 +265,21 @@ Agent Request → User Override (if configured) → Fallback Chain → System De
 
 ### File-Based Prompts
 
-You can load agent system prompts from external files using `file://` URLs in the `prompt` field, or append additional content with `prompt_append`. The `prompt_append` field also works on categories.
+You can load agent system prompts from external files using `file://` URLs in the `prompt` field, or append additional content with `prompt_append`.
 
 ```jsonc
 {
   "agents": {
     "sisyphus": {
-      "prompt": "file:///path/to/custom-prompt.md"
+      "prompt": "file:///path/to/custom-sisyphus-prompt.md"
     },
     "oracle": {
-      "prompt_append": "file:///path/to/additional-context.md"
+      "prompt_append": "file:///path/to/oracle-additional-context.md"
     }
   },
   "categories": {
-    "deep": {
-      "prompt_append": "file:///path/to/deep-category-append.md"
+    "deep-research": {
+      "prompt_append": "file:///path/to/deep-research-append.md"
     }
   }
 }
