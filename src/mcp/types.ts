@@ -10,6 +10,10 @@ export const McpNameSchema = z.enum([
   "nlp-api",
   "google-analytics",
   "appstore-reviews",
+  "context7",
+  "grep_app",
+  "academic-search",
+  "social-search",
 ])
 
 export type McpName = z.infer<typeof McpNameSchema>

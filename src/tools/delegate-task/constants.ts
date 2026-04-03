@@ -484,14 +484,14 @@ BEFORE delivering study, answer these:
 
 
 export const DEFAULT_CATEGORIES: Record<string, CategoryConfig> = {
-  "visual-audit": { model: "moonshot/kimi-k2.5", variant: "high" },
-  "thematic-analysis": { model: "zai/glm-5", variant: "xhigh" },
-  "deep-research": { model: "moonshot/kimi-k2.5", variant: "medium" },
-  "creative-insights": { model: "qwen/qwen3.5", variant: "high" },
-  "quick-lookup": { model: "minimax/minimax-m2.7" },
-  "content-coding": { model: "zai/glm-5" },
-  "report-writing": { model: "moonshot/kimi-k2.5" },
-  "comprehensive-study": { model: "qwen/qwen3.5", variant: "max" },
+  "visual-audit": { model: "bailian-coding-plan/kimi-k2.5", variant: "high" },
+  "thematic-analysis": { model: "bailian-coding-plan/glm-5", variant: "xhigh" },
+  "deep-research": { model: "bailian-coding-plan/kimi-k2.5", variant: "medium" },
+  "creative-insights": { model: "bailian-coding-plan/qwen3.5-plus", variant: "high" },
+  "quick-lookup": { model: "bailian-coding-plan/MiniMax-M2.5" },
+  "content-coding": { model: "bailian-coding-plan/glm-5" },
+  "report-writing": { model: "bailian-coding-plan/kimi-k2.5" },
+  "comprehensive-study": { model: "bailian-coding-plan/qwen3.5-plus", variant: "max" },
 }
 
 export const CATEGORY_PROMPT_APPENDS: Record<string, string> = {

@@ -32,7 +32,7 @@ const MODE: AgentMode = "subagent"
 const BLOCKED_TOOLS = ["task"]
 
 export const SISYPHUS_JUNIOR_DEFAULTS = {
-  model: "anthropic/claude-sonnet-4-6",
+  model: "bailian-coding-plan/kimi-k2.5",
   temperature: 0.1,
 } as const
 
@@ -105,7 +105,7 @@ export function createSisyphusJuniorAgentWithOverrides(
 
   const base: AgentConfig = {
     description: override?.description ??
-      "Focused task executor. Same discipline, no delegation. (Sisyphus-Junior - OhMyOpenCode)",
+      "Focused task executor. Same discipline, no delegation. (Sisyphus-Junior - OhMyOpenBusiness)",
     mode: MODE,
     model,
     temperature,

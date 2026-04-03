@@ -5,11 +5,16 @@ import {
   playwrightSkill,
   agentBrowserSkill,
   playwrightCliSkill,
-  frontendUiUxSkill,
-  gitMasterSkill,
-  devBrowserSkill,
-  reviewWorkSkill,
-  aiSlopRemoverSkill,
+  webScraperSkill,
+  socialListenerSkill,
+  sentimentAnalyzerSkill,
+  personaBuilderSkill,
+  journeyMapperSkill,
+  uxHeuristicsSkill,
+  researchMethodologySkill,
+  competitorAnalystSkill,
+  dataTriangulatorSkill,
+  researchArchitectSkill,
 } from "./skills/index"
 
 export interface CreateBuiltinSkillsOptions {
@@ -29,7 +34,19 @@ export function createBuiltinSkills(options: CreateBuiltinSkillsOptions = {}): B
     browserSkill = playwrightSkill
   }
 
-  const skills = [browserSkill, frontendUiUxSkill, gitMasterSkill, devBrowserSkill, reviewWorkSkill, aiSlopRemoverSkill]
+  const skills = [
+    browserSkill,
+    webScraperSkill,
+    socialListenerSkill,
+    sentimentAnalyzerSkill,
+    personaBuilderSkill,
+    journeyMapperSkill,
+    uxHeuristicsSkill,
+    researchMethodologySkill,
+    competitorAnalystSkill,
+    dataTriangulatorSkill,
+    researchArchitectSkill,
+  ]
 
   if (!disabledSkills) {
     return skills

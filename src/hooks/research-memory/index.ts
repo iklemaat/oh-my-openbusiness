@@ -45,6 +45,14 @@ interface PatternEntry {
   related_findings: string[]
 }
 
+function extractTextContent(
+  content: string | Array<{ type: string; text?: string; image_url?: { url: string } }> | undefined,
+): string {
+  if (!content) return ""
+  if (typeof content === "string") return content
+  return content.map((block) => block.text ?? "").join(" ")
+}
+
 export function createResearchMemoryHook(): HookFunction {
   return async (event, ctx) => {
     if (event.type !== "session.idle") return
@@ -56,14 +64,14 @@ export function createResearchMemoryHook(): HookFunction {
     const isResearchSession = session.messages?.some(
       (m: any) =>
         m.role === "user" &&
-        /investigate|research|analyze|audit|find.*about|what.*people.*say/i.test(m.content || "")
+        /investigate|research|analyze|audit|find.*about|what.*people.*say/i.test(extractTextContent(m.content))
     )
 
     if (!isResearchSession) return
 
     // Extract research topic from first user message
     const firstUserMessage = session.messages?.find((m: any) => m.role === "user")
-    const researchTopic = firstUserMessage?.content?.slice(0, 200) || "unknown"
+    const researchTopic = extractTextContent(firstUserMessage?.content).slice(0, 200) || "unknown"
 
     // Count findings and insights in the session
     const assistantMessages = session.messages?.filter((m: any) => m.role === "assistant") || []
@@ -72,7 +80,7 @@ export function createResearchMemoryHook(): HookFunction {
     const sourcesUsed = new Set<string>()
 
     for (const msg of assistantMessages) {
-      const content = msg.content || ""
+      const content = extractTextContent(msg.content)
       findingsCount += (content.match(/finding|evidence|quote|data point/gi) || []).length
       insightsCount += (content.match(/insight|pattern|theme|recommendation/gi) || []).length
 
@@ -80,7 +88,7 @@ export function createResearchMemoryHook(): HookFunction {
       const sourceMatches = content.match(
         /(reddit|twitter|x\.com|forum|review|app store|play store|survey|analytics)/gi
       )
-      sourceMatches?.forEach((s) => sourcesUsed.add(s.toLowerCase()))
+      sourceMatches?.forEach((s: string) => sourcesUsed.add(s.toLowerCase()))
     }
 
     // Build memory entry
@@ -176,7 +184,7 @@ export function createResearchMemoryHook(): HookFunction {
       ]
 
       for (const msg of assistantMessages) {
-        const content = msg.content || ""
+        const content = extractTextContent(msg.content)
         for (const keyword of patternKeywords) {
           const regex = new RegExp(keyword, "gi")
           const matches = content.match(regex)
