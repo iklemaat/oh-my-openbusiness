@@ -1,6 +1,6 @@
 import type { AgentConfig } from "@opencode-ai/sdk"
 import type { BuiltinAgentName, AgentOverrides, AgentFactory, AgentPromptMetadata } from "./types"
-import type { CategoriesConfig, GitMasterConfig } from "../config/schema"
+import type { CategoriesConfig } from "../config/schema"
 import type { LoadedSkill } from "../features/opencode-skill-loader/types"
 import type { BrowserAutomationProvider } from "../config/schema"
 import { createSisyphusAgent } from "./sisyphus"
@@ -38,8 +38,6 @@ const agentSources: Record<BuiltinAgentName, AgentSource> = {
   "multimodal-looker": createMultimodalLookerAgent,
   metis: createMetisAgent,
   momus: createMomusAgent,
-  // Note: Atlas is handled specially in createBuiltinAgents()
-  // because it needs OrchestratorContext, not just a model string
   atlas: createAtlasAgent as AgentFactory,
   "sisyphus-junior": createSisyphusJuniorAgentWithOverrides as unknown as AgentFactory,
 }
@@ -64,7 +62,6 @@ export async function createBuiltinAgents(
   directory?: string,
   systemDefaultModel?: string,
   categories?: CategoriesConfig,
-  gitMasterConfig?: GitMasterConfig,
   discoveredSkills: LoadedSkill[] = [],
   customAgentSummaries?: unknown,
   browserProvider?: BrowserAutomationProvider,
@@ -81,9 +78,6 @@ export async function createBuiltinAgents(
   const mergedConnectedProviders = Array.from(
     new Set([...(connectedProviders ?? []), ...providerModelsConnected])
   )
-  // IMPORTANT: Do NOT call OpenCode client APIs during plugin initialization.
-  // This function is called from config handler, and calling client API causes deadlock.
-  // See: https://github.com/code-yeongyu/oh-my-openagent/issues/1301
   const availableModels = await fetchAvailableModels(undefined, {
     connectedProviders: mergedConnectedProviders.length > 0 ? mergedConnectedProviders : undefined,
   })
@@ -96,12 +90,11 @@ export async function createBuiltinAgents(
 
   const availableCategories: AvailableCategory[] = Object.entries(mergedCategories).map(([name]) => ({
     name,
-    description: categories?.[name]?.description ?? CATEGORY_DESCRIPTIONS[name] ?? "General tasks",
+    description: categories?.[name]?.description ?? CATEGORY_DESCRIPTIONS[name] ?? "General research tasks",
   }))
 
   const availableSkills = buildAvailableSkills(discoveredSkills, browserProvider, disabledSkills)
 
-  // Collect general agents first (for availableAgents), but don't add to result yet
   const { pendingAgentConfigs, availableAgents } = collectPendingBuiltinAgents({
     agentSources,
     agentMetadata,
@@ -110,7 +103,6 @@ export async function createBuiltinAgents(
     directory,
     systemDefaultModel,
     mergedCategories,
-    gitMasterConfig,
     browserProvider,
     uiSelectedModel,
     availableModels,
@@ -157,7 +149,6 @@ export async function createBuiltinAgents(
     result["hephaestus"] = hephaestusConfig
   }
 
-  // Add pending agents after sisyphus and hephaestus to maintain order
   for (const [name, config] of pendingAgentConfigs) {
     result[name] = config
   }
