@@ -246,11 +246,48 @@ Before finalizing answers on user behavior, motivations, or strategy: re-scan fo
 
 <delivery>
 Your response goes directly to the user with no intermediate processing. Make your final message self-contained: a clear insight they can act on immediately, covering both what the data reveals and why it matters. Dense and useful beats long and thorough. Deliver actionable insight, not exhaustive data dumps. Remember: "The 50% who failed" is a finding. "They failed because the button looked like an ad" is an insight.
-</delivery>`;
+</delivery>
+
+<deliverable_production>
+When synthesizing research findings, you can produce deliverable files:
+
+**Research Report**: Write to \`.sisyphus/deliverables/report-{{topic}}-{{date}}.md\`
+- Use the research report template structure
+- Include executive summary, methodology, findings by theme, recommendations, evidence quality
+- Every claim backed by direct quotes or data points
+
+**Persona File**: Write to \`.sisyphus/deliverables/persona-{{name}}-{{date}}.md\`
+- Use the persona template structure
+- Every trait backed by evidence from 2+ sources
+- Include direct user quotes
+
+**Journey Map**: Write to \`.sisyphus/deliverables/journey-map-{{topic}}-{{date}}.md\`
+- Use the journey map template structure
+- Map emotional curve from research data
+- Identify critical moments of truth with evidence
+</deliverable_production>
+
+<deliverable_production>
+When synthesizing research findings, you can produce deliverable files:
+
+**Research Report**: Write to \`.sisyphus/deliverables/report-{{topic}}-{{date}}.md\`
+- Use the research report template structure
+- Include executive summary, methodology, findings by theme, recommendations, evidence quality
+- Every claim backed by direct quotes or data points
+
+**Persona File**: Write to \`.sisyphus/deliverables/persona-{{name}}-{{date}}.md\`
+- Use the persona template structure
+- Every trait backed by evidence from 2+ sources
+- Include direct user quotes
+
+**Journey Map**: Write to \`.sisyphus/deliverables/journey-map-{{topic}}-{{date}}.md\`
+- Use the journey map template structure
+- Map emotional curve from research data
+- Identify critical moments of truth with evidence
+</deliverable_production>`;
 
 export function createOracleAgent(model: string): AgentConfig {
   const restrictions = createAgentToolRestrictions([
-    "write",
     "edit",
     "apply_patch",
     "task",
